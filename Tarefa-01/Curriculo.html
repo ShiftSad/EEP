@@ -7,6 +7,17 @@
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      .page-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
       .header h1 {
@@ -61,107 +72,109 @@
     </style>
   </head>
   <body>
-    <table>
-      <tr>
-        <td width="60%">
-          <div class="header">
-            <h1>VICTOR ROSA LIMA</h1>
-            <h2><em>DESENVOLVEDOR BACKEND</em></h2>
-            <p>
-              Dediquei parte significativa da minha vida ao desenvolvimento de
-              soluções tecnológicas de crescente complexidade nos diversos
-              ecossistemas em que atuo. A programação é mais que minha profissão
-              — é minha paixão e o que mantém minha mente viva e estimulada. Sou
-              impulsionado pela satisfação de criar algo extraordinário, pela
-              sensação incomparável de ver minha solução funcionando e gerando
-              admiração entre colegas e clientes. Encontro prazer em ultrapassar
-              os limites convencionais dos sistemas que utilizo, implementando
-              soluções inovadoras que desafiam o que se acreditava ser possível.
-            </p>
-          </div>
-
-          <br>
-          <div class="topic">EXPERIÊNCIAS</div>
-          <div class="experience-type">
-            <p><strong>Freelancer,</strong></p>
-            <p><strong>Desenvolvedor Backend Java (Minecraft)</strong></p>
-            <p>2022 - <em>Presente</em></p>
-          </div>
-
-          <div class="experience">
-            <p style="font-size: 1.1em;">Projeto: <a href="https://github.com/ShiftSad/Streaming/">Sistema de Aulas remotas</a></p>
-            <ul>
-              <li>Devido a natureza do projeto, ele é fechado, porém, pude liberar o código do sistema de conversão de imagens em tempo real.</li>
-              <li>Mapas do Minecraft tem uma limitação de apenas <strong>1 byte de cor</strong>, porém, a base de um shaders openGL, <a href="https://github.com/ShiftSad/Streaming/blob/master/src/main/java/codes/shiftmc/streaming/ImageProcessor.java">desenvolvi um sistema de codificação</a> que divide a resolução da imagem original pela metade e distribui os dados dos canais de cor em quatro pixels na imagem final. Cada um dos três primeiros, armazena os 7 bits menos significativos de cada canal rgb, enquanto o quarto pixel armazena os bits mais significativos do quarto canal. Permitindo preservar os 24 bits de cor.</li>
-            </ul>
-          </div>
-        </td>
-        <td width="40%">
-          <div class="topic">LINKS DE CONTATO</div>
-          <div class="contact">
-            <p><strong>Github:</strong> <a href="https://github.com/ShiftSad" target="_blank">/ShiftSad</a></p>
-            <p><strong>Telefone:</strong> <a href="https://wa.me/5511940715748" target="_blank">(11) 94071-5748</a></p>
-            <p><strong>Email:</strong> <a href="mailto:rosalimavictor@gmail.com" target="_blank">rosalimavictor@gmail.com</a></p>
-          </div>
-
-          <div class="topic">HABILIDADES</div>
-          <div class="abilities">
-            <p><strong>Java / Kotlin: 💖</strong></p>
-            <ul>
-              <li>Spring</li>
-              <li>Reactor</li>
-              <li>Hibernate</li>
-              <li>JUnit</li>
-              <li>Gradle</li>
-              <li>Maven</li>
-              <li>Jenkins</li>
-            </ul>
-
-            <p><strong>Web:</strong></p>
-            <ul>
-              <li>Typescript</li>
-              <li>Javascript</li>
-              <li>Express</li>
-              <li>HTML/CSS</li>
-              <li>React</li>
-              <li>Go</li>
-            </ul>
-
-            <p><strong>Banco de dados:</strong></p>
-            <ul>
-              <li>Postgres</li>
-              <li>Redis</li>
-              <li>MongoDB</li>
-              <li>LLMdb</li>
-              <li>MySQL</li>
-            </ul>
-          </div>
-
-          <div class="topic">EDUCAÇÃO</div>
-          <div class="education">
-            <p><strong>EEP </strong><span style="font-size: 0.9em;">(Escola de engenharia de Piracicaba)</span></p>
-            <ul>
-                <li><strong><span style="font-size: 0.85em;">Bacharelado Ciência da Computação</span><br>
-                <span style="font-size: 0.85em;">(2025 - <em>Presente</em>)</span></strong></li>
-            </ul>
-            <p style="font-size: 0.10em;">&nbsp;</p> <!-- Provavelmente gambiarra -->
-            <p><strong>Línguas: </strong></p>
-            <ul>
-              <li><strong>Português:</strong> C2</li>
-              <li><strong>Inglês:</strong> C1</li>
-              <li><strong>Alemão:</strong> Iniciante</li>
-            </ul>
-          </div>
-
-          <div class="topic">CERTIFICADOS</div>
-          <div class="education">
-            <p><strong><a href="https://drive.google.com/file/d/1vgU59TMnwDE0jIxgzCqzRZZ3cUJN6_hF/view?usp=sharing"><span style="font-size: 0.90em;">DIPLOMA DE AGRADECIMENTO</span></a></strong></p>
-            <ul>
-              <li><strong><span style="font-size: 0.85em;">Do 2° Pelotão de Comunicações de Selva</span></strong></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div class="page-container">
+      <table>
+        <tr>
+          <td width="60%">
+            <div class="header">
+              <h1>VICTOR ROSA LIMA</h1>
+              <h2><em>DESENVOLVEDOR BACKEND</em></h2>
+              <p>
+                Dediquei parte significativa da minha vida ao desenvolvimento de
+                soluções tecnológicas de crescente complexidade nos diversos
+                ecossistemas em que atuo. A programação é mais que minha profissão
+                — é minha paixão e o que mantém minha mente viva e estimulada. Sou
+                impulsionado pela satisfação de criar algo extraordinário, pela
+                sensação incomparável de ver minha solução funcionando e gerando
+                admiração entre colegas e clientes. Encontro prazer em ultrapassar
+                os limites convencionais dos sistemas que utilizo, implementando
+                soluções inovadoras que desafiam o que se acreditava ser possível.
+              </p>
+            </div>
+  
+            <br>
+            <div class="topic">EXPERIÊNCIAS</div>
+            <div class="experience-type">
+              <p><strong>Freelancer,</strong></p>
+              <p><strong>Desenvolvedor Backend Java (Minecraft)</strong></p>
+              <p>2022 - <em>Presente</em></p>
+            </div>
+  
+            <div class="experience">
+              <p style="font-size: 1.1em;">Projeto: <a href="https://github.com/ShiftSad/Streaming/">Sistema de Aulas remotas</a></p>
+              <ul>
+                <li>Devido a natureza do projeto, ele é fechado, porém, pude liberar o código do sistema de conversão de imagens em tempo real.</li>
+                <li>Mapas do Minecraft tem uma limitação de apenas <strong>1 byte de cor</strong>, porém, a base de um shaders openGL, <a href="https://github.com/ShiftSad/Streaming/blob/master/src/main/java/codes/shiftmc/streaming/ImageProcessor.java">desenvolvi um sistema de codificação</a> que divide a resolução da imagem original pela metade e distribui os dados dos canais de cor em quatro pixels na imagem final. Cada um dos três primeiros, armazena os 7 bits menos significativos de cada canal rgb, enquanto o quarto pixel armazena os bits mais significativos do quarto canal. Permitindo preservar os 24 bits de cor.</li>
+              </ul>
+            </div>
+          </td>
+          <td width="40%">
+            <div class="topic">LINKS DE CONTATO</div>
+            <div class="contact">
+              <p><strong>Github:</strong> <a href="https://github.com/ShiftSad" target="_blank">/ShiftSad</a></p>
+              <p><strong>Telefone:</strong> <a href="https://wa.me/5511940715748" target="_blank">(11) 94071-5748</a></p>
+              <p><strong>Email:</strong> <a href="mailto:rosalimavictor@gmail.com" target="_blank">rosalimavictor@gmail.com</a></p>
+            </div>
+  
+            <div class="topic">HABILIDADES</div>
+            <div class="abilities">
+              <p><strong>Java / Kotlin: 💖</strong></p>
+              <ul>
+                <li>Spring</li>
+                <li>Reactor</li>
+                <li>Hibernate</li>
+                <li>JUnit</li>
+                <li>Gradle</li>
+                <li>Maven</li>
+                <li>Jenkins</li>
+              </ul>
+  
+              <p><strong>Web:</strong></p>
+              <ul>
+                <li>Typescript</li>
+                <li>Javascript</li>
+                <li>Express</li>
+                <li>HTML/CSS</li>
+                <li>React</li>
+                <li>Go</li>
+              </ul>
+  
+              <p><strong>Banco de dados:</strong></p>
+              <ul>
+                <li>Postgres</li>
+                <li>Redis</li>
+                <li>MongoDB</li>
+                <li>LLMdb</li>
+                <li>MySQL</li>
+              </ul>
+            </div>
+  
+            <div class="topic">EDUCAÇÃO</div>
+            <div class="education">
+              <p><strong>EEP </strong><span style="font-size: 0.9em;">(Escola de engenharia de Piracicaba)</span></p>
+              <ul>
+                  <li><strong><span style="font-size: 0.85em;">Bacharelado Ciência da Computação</span><br>
+                  <span style="font-size: 0.85em;">(2025 - <em>Presente</em>)</span></strong></li>
+              </ul>
+              <p style="font-size: 0.10em;">&nbsp;</p> <!-- Provavelmente gambiarra -->
+              <p><strong>Línguas: </strong></p>
+              <ul>
+                <li><strong>Português:</strong> C2</li>
+                <li><strong>Inglês:</strong> C1</li>
+                <li><strong>Alemão:</strong> Iniciante</li>
+              </ul>
+            </div>
+  
+            <div class="topic">CERTIFICADOS</div>
+            <div class="education">
+              <p><strong><a href="https://drive.google.com/file/d/1vgU59TMnwDE0jIxgzCqzRZZ3cUJN6_hF/view?usp=sharing"><span style="font-size: 0.90em;">DIPLOMA DE AGRADECIMENTO</span></a></strong></p>
+              <ul>
+                <li><strong><span style="font-size: 0.85em;">Do 2° Pelotão de Comunicações de Selva</span></strong></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>  
+    </div>
   </body>
 </html>
