@@ -54,6 +54,10 @@
       .education ul {
         margin: 0;
       }
+
+      .experience-type p {
+        margin: 0;
+      }
     </style>
   </head>
   <body>
@@ -74,6 +78,22 @@
               os limites convencionais dos sistemas que utilizo, implementando
               soluções inovadoras que desafiam o que se acreditava ser possível.
             </p>
+          </div>
+
+          <br>
+          <div class="topic">EXPERIÊNCIAS</div>
+          <div class="experience-type">
+            <p><strong>Freelancer,</strong></p>
+            <p><strong>Desenvolvedor Backend Java (Minecraft)</strong></p>
+            <p>2022 - <em>Presente</em></p>
+          </div>
+
+          <div class="experience">
+            <p style="font-size: 1.1em;">Projeto: <a href="https://github.com/ShiftSad/Streaming/">Sistema de Aulas remotas</a></p>
+            <ul>
+              <li>Devido a natureza do projeto, ele é fechado, porém, pude liberar o código do sistema de conversão de imagens em tempo real.</li>
+              <li>Mapas do Minecraft tem uma limitação de apenas <strong>1 byte de cor</strong>, porém, a base de um shaders openGL, <a href="https://github.com/ShiftSad/Streaming/blob/master/src/main/java/codes/shiftmc/streaming/ImageProcessor.java">desenvolvi um sistema de codificação</a> que divide a resolução da imagem original pela metade e distribui os dados dos canais de cor em quatro pixels na imagem final. Cada um dos três primeiros, armazena os 7 bits menos significativos de cada canal rgb, enquanto o quarto pixel armazena os bits mais significativos do quarto canal. Permitindo preservar os 24 bits de cor.</li>
+            </ul>
           </div>
         </td>
         <td width="40%">
