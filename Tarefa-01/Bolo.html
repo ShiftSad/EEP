@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolo Simples - Receitas de Família</title>
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f5f0;
+            color: #333;
+        }
+        
+        header {
+            background-color: #ff7e36;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 30px;
+        }
+        
+        .category {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff7e36;
+            padding-bottom: 0.5rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        img {
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        p {
+            vertical-align: middle;
+            word-wrap: break-word;
+            max-width: calc(100% - 60px);
+        }
+
+        .ingredients img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .ingredients p {
+            display: inline-block;
+            font-size: 1em;
+        }
+        
+        .ingredients td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .items img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .items p {
+            display: inline-block;
+            font-size: 1em;
+        }
+
+        .items td {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            vertical-align: top;
+            width: 200px;
+            height: 0px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .items td:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .items table {
+            border-spacing: 10px;
+            border-collapse: separate;
+            table-layout: fixed;
+        }
+
+        .preparation ol {
+            margin-top: 20px;
+            padding-left: 20px;
+            counter-reset: item;
+            list-style-type: none;
+        }
+
+        .preparation li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 15px;
+            margin-top: 1em;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+            padding-top: 10px;
+            width: 100%;
+        }
+
+        .preparation li:before {
+            content: counter(item);
+            counter-increment: item;
+            color: white;
+            background-color: #ff7e36;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-button {
+            display: inline-block;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #ff7e36;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .back-button:hover {
+            background-color: #e06525;
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <header>
+        <h1>Bolo Simples</h1>
+    </header>
+
+    <div class="container">
+        <a href="Receitas.html" class="back-button">← Voltar para receitas</a>
+        
+        <div class="ingredients">
+            <div class="category">Ingredientes (12 porções)</div>
+            <table>
+                <tr>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/1946f8f06c8a24ac1566cd9565c5811f/acucar.jpg" alt="Açúcar">
+                        <p>2 xícaras (chá) de açucar</p>
+                    </td>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/c870063e6c61b3c9e6b6fc4374a6ce31/margarina.jpg" alt="Margarina">
+                        <p>4 colheres (sopa) de margarina</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/2c484ffc860bbf21df138a04dd5f2c28/leite.jpg" alt="Leite">
+                        <p>1 e 1/2 xícara (chá) de leite</p>
+                    </td>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/fbdc17cf67d906d28aa2450f948fa6e6/farinha-de-trigo.jpg" alt="Farinha de trigo">
+                        <p>3 xícaras (chá) de farinha de trigo</p>
+                    </td>
+                </tr>
+                <tr>    
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/94a20d33e2970191e1d4d1a48157f47b/ovo.jpg" alt="Ovo">
+                        <p>3 ovos</p>
+                    </td>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/2495316fe15069259d1adf3f985c374b/fermento-em-po.jpg" alt="Fermento em pó">
+                        <p>1 colher (sopa) bem cheia de fermento em pó</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="items">
+            <div class="category">Utensílios</div>
+            <table>
+                <tr>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/5086174cdaed9a53f403a12e944193f2/4.jpg" alt="Batedeira">
+                        <p>Batedeira</p>
+                    </td>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/3d5858329b62341fc05e25cc78d97104/5.jpg" alt="Forma">
+                        <p>Forma</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/4ca4844e6be85f4397a095c5ece625bc/20.jpg" alt="Espátula para bolo">
+                        <p>Espátula para bolo</p>
+                    </td>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/6807082e72102611467c4f3a1332a0bb/30.jpg" alt="Forma de bolo">
+                        <p>Forma de bolo</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://static.itdg.com.br/images/80-80/60ad1641637ef2021abc40c78f1de4c4/56.jpg" alt="Prato de sobremesa">
+                        <p>Prato de sobremesa</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="preparation">
+            <div class="category">Modo de preparo</div>
+            <ol>
+                <li>Bata as claras em neve e reserve</li>
+                <li>Misture as gemas, a margarina e o açúcar até obter uma massa homogênea.</li>
+                <li>Acrescente o leite e a farinha de trigo aos poucos, sem parar de bater.</li>
+                <li>Por último, adicione as claras em neve e o fermento.</li>
+                <li>Despeje a massa em uma forma grande de furo central untada e enfarinhada.</li>
+                <li>Asse em forno médio 180 °C, preaquecido, por aproximadamente 40 minutos ou ao furar o bolo com um garfo, este saia limpo.</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

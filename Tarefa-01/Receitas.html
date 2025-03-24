@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receitas de Família</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f5f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff7e36;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .recipe-content {
+            padding: 1.5rem;
+        }
+
+        .recipe-title {
+            font-size: 1.3rem;
+            margin: 0 0 0.5rem;
+            color: #ff7e36;
+        }
+
+        .recipe-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .recipe-button {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.7rem 0;
+            background-color: #ff7e36;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .recipe-button:hover {
+            background-color: #e06525;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Receitas de Família</h1>
+        <p>Sabores que passam de geração em geração</p>
+    </header>
+
+    <div class="container">
+        <section class="recipe-grid">
+            <div class="recipe-card">
+                <div class="recipe-image" style="background-image: url('https://static.itdg.com.br/images/640-440/cfaeadb92ac4a77e9b0ebaf46816c7e2/68843-320646-original.jpg');"></div>
+                <div class="recipe-content">
+                    <h3 class="recipe-title">Bolo Simples</h3>
+                    <p class="recipe-description">Um delicioso bolo fofinho e caseiro, perfeito para o café da tarde.</p>
+                    <div class="recipe-meta">
+                        <span>Tempo: 40 min</span>
+                        <span>Porções: 12</span>
+                    </div>
+                    <a href="Bolo.html" class="recipe-button">Ver receita</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
