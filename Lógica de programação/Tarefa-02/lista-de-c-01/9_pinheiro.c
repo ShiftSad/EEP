@@ -16,7 +16,6 @@ int main() {
     }
     
     for (int i = 0; i < size/3; i++) {
-        // If it's the last row, use one less space
         if (i == size / 3 - 1) {
             for (int j = 0; j < size - 3; j++) {
                 printf(" ");
