@@ -2,6 +2,9 @@ import os
 import re
 from collections import defaultdict
 
+my_name = "Victor Rosa Lima"
+ra = 51346
+
 # Obrigado ChatGPT, eu não tava com vontade de fazer isso1
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +47,9 @@ def main():
 
     output_filename = 'exercicios_combinados.md'
     with open(output_filename, 'w', encoding='utf-8') as f:
+        # Header data
+        f.write(f"# Nome: {my_name} - RA: {ra}\n\n")
+
         main_title = " e ".join(sorted_dirs)
         f.write(f"# Tarefa: {main_title}\n\n")
         for dir_name in sorted_dirs:
