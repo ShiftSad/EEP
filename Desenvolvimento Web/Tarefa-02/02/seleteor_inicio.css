@@ -1,0 +1,85 @@
+* {
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main-title {
+  color: #FF69B4;
+  font-size: 2em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 0;
+  padding-bottom: 15px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+input[placeholder="data de nascimento"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fb6542;
+}
+
+button {
+  background-color: #fb6542;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e5533d;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 8px dotted #800080;
+  margin-bottom: 10px;
+}
+
+span {
+  background-color: yellow;
+}
+
+strong {
+  color: rebeccapurple;
+}
+
+em {
+  color: rebeccapurple;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
