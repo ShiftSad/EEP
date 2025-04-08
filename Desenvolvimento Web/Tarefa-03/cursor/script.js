@@ -6,7 +6,7 @@ let targetX = 0;
 let targetY = 0;
 
 // Smoothing factor (lower value = smoother/slower)
-const smoothness = 0.15;
+const smoothness = 0.7;
 
 document.addEventListener('mousemove', e => {
     targetX = e.pageX;
