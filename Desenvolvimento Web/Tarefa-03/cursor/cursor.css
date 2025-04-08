@@ -1,0 +1,32 @@
+/* Add this to your existing cursor.css */
+
+.cursor {
+    display: block;
+    width: 40px;
+    height: 40px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("https://qvjv542bqm.ufs.sh/f/fKOurpW8jVvX4CYB3bOgJTtqhQMo9vjwfeFIEbKu2ismAO7N");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    transition: transform 0.1s ease-out, background-image 0.05s linear; 
+
+    image-rendering: pixelated;
+}
+
+.cursor.interacting {
+    background-image: url("https://qvjv542bqm.ufs.sh/f/fKOurpW8jVvXUtz6zCJQMy6uInh5avDcHxFzriZkUXLwfK9V");
+}
+
+body {
+    cursor: none !important;
+}
+
+a, button, input, textarea, select {
+     cursor: none !important;
+}
