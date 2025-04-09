@@ -1,14 +1,5 @@
 #include <stdio.h>
 
-// 1 = sul
-// 2 = norte
-// 3 leste
-// 4 = oeste
-// 5 6 nordeste
-// 7 8 9 sudeste
-// 10 a 20 centro oeste
-// 21 a 30 nordeste
-
 int main() {
     int estado, procedencia;
     printf("Digite o estado de procedencia (1 - Sul, 2 - Norte, 3 - Leste, 4 - Oeste, 5 - Nordeste, 6 - Sudeste, 7 - Centro-Oeste): ");

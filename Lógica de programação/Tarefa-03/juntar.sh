@@ -1,0 +1,1 @@
+python juntar_tarefa.py
