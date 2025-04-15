@@ -1,0 +1,44 @@
+/* Landing page */
+.spectral-font {
+    font-family: 'Spectral', serif;
+    font-size: 4rem;
+    color: #FF7D00;
+    text-align: center;
+}
+
+.landing-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 80vh;
+    width: 100vw;
+    margin: 0;
+    left: 50%;
+    right: 50%;
+    
+    transform: translateX(-50%);
+    background-image: url(https://qvjv542bqm.ufs.sh/f/fKOurpW8jVvX5lMelBuxTxm6qQJNA2EgcoalGhYpMi7dBKCn);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.landing-table-item {
+    flex-basis: 55%;
+    margin-left: 20rem;
+}
+
+.landing-table-item p {
+    color: #ffecd6;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    max-width: 60vh;
+}
+
+.landing-table-item img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}

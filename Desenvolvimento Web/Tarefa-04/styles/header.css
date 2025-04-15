@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    background-color: #FFECD1;
+    font-size:1rem;
+}
+
+header{
+    height:10%;
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+    background-color:white;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size:24px;
+    letter-spacing:0.2rem;
+}
+
+.logo i {
+    color:#FF7D00;
+    font-size: 25px;
+}
+
+.nav-bar{
+    display:flex;
+    gap:30px;
+    margin-right:15px;
+    font-size:20px;
+    
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color:#FF7D00;
+}
+
+.nav-bar a:hover{
+    color: #FF7D00;
+}
