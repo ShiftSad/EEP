@@ -1,44 +1,228 @@
-/* Landing page */
-.spectral-font {
-    font-family: 'Spectral', serif;
-    font-size: 4rem;
-    color: #FF7D00;
-    text-align: center;
+body {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  position: relative;
+  font-family: 'Spectral';
+  background-color: #e2b07e;
 }
 
-.landing-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    height: 80vh;
-    width: 100vw;
-    margin: 0;
-    left: 50%;
-    right: 50%;
-    
-    transform: translateX(-50%);
-    background-image: url(https://qvjv542bqm.ufs.sh/f/fKOurpW8jVvX5lMelBuxTxm6qQJNA2EgcoalGhYpMi7dBKCn);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+/*SECTION INTRODUÇÃO*/
+#inicio{
+height: 100vh;
+background-image: url(../images/BG.atividades.png);
+background-position: center;
+background-size: cover;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.landing-table-item {
-    flex-basis: 55%;
-    margin-left: 20rem;
+.container_introducao {
+max-width: 800px;
 }
 
-.landing-table-item p {
-    color: #ffecd6;
-    font-size: 1.5rem;
-    line-height: 1.4;
-    max-width: 60vh;
+.text {
+padding:60px;
+margin-left:20px;
 }
 
-.landing-table-item img {
-    width: 200px;
-    height: auto;
-    border-radius: 10px;
+.text h1{
+font-size:40px;
+color:#f28c28
+}
+
+.text h2,
+.text p {
+font-size: 20px;
+color:#FFF;
+text-align: justify;
+font-weight:500;
+}
+
+/*SECTION LINE*/
+.line {
+height: 80px;
+background-color:  #e2b07e;
+}
+
+.line span{
+color:transparent;
+}
+
+/*MAIN*/
+
+main {
+height: 100%;
+background-color: #f7e4c3;
+}
+
+main h3{
+display: flex;
+justify-content: center;
+font-size:28px;    
+}
+
+table {
+width: 90%;
+margin:40px auto;
+border-collapse: collapse;
+background-color: #fff8f0;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+tr{
+font-size: 18px;
+font-weight: 500;
+text-align: justify;
+}
+
+th {
+background-color: #f28c28;
+color: white;
+padding: 12px;
+font-size: 18px;
+}
+
+td {
+padding: 12px;
+border: 1px solid #ccc;
+vertical-align: middle;
+}
+
+img {
+border-radius: 8px;
+box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+transition: transform 0.3s ease;
+}
+
+img:hover {
+transform: scale(1.05);
+}
+
+a {
+text-decoration: none;
+}
+
+.imagem img{
+width: 120px;
+height: 120px;
+}
+
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.feature-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.feature-card h4 {
+  font-size: 22px;
+  color: #f28c28;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #5c3a1c;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cta-section {
+  text-align: center;
+  margin: 60px auto;
+  max-width: 800px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section h3 {
+  color: #f28c28;
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #f28c28;
+  color: white !important;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #d97d32;
+  transform: scale(1.05);
+}
+
+#home-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  
+  background-image: url(https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+}
+
+#home-banner .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#home-banner h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: 'Spectral', serif;
+}
+
+#home-banner h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+#home-banner p {
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
