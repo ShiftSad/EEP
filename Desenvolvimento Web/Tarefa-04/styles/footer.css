@@ -1,74 +1,73 @@
 footer {
-    background-color: #f7e4c3;
-    color: #5c3a1c;
-    padding: 40px 20px;
-    border-top: 2px solid #e2b07e;
-  }
-  
-  .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
-  }
-  
-  .footer-section {
-    flex: 1;
-    min-width: 200px;
-  }
-  
-  .footer-section h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    margin-bottom: 8px;
-  }
-  
-  .footer-section ul li a {
-    color: #5c3a1c;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .footer-section ul li a:hover {
-    color: #d97d32;
-  }
-  
-  .logo span {
-    font-size: 28px;
-    margin-right: 8px;
-  }
-  
-  .social-icons a {
-    font-size: 16px;
-    display: inline-block;
-    margin-bottom: 8px;
-    text-decoration: none;
-    color: #5c3a1c;
-    transition: color 0.3s;
-  }
-  
-  .social-icons i {
-    font-size: 16px;
-  }
-  
-  .social-icons a:hover {
-    color: #d97d32;
-  }
-  
-  .copyright {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 14px;
-    color: #7b5e3e;
-  }
-  
+  background-color: #f7e4c3;
+  color: #5c3a1c;
+  padding: 40px 20px;
+  border-top: 2px solid #e2b07e;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #5c3a1c;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #d97d32;
+}
+
+.logo span {
+  font-size: 28px;
+  margin-right: 8px;
+}
+
+.social-icons a {
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: #5c3a1c;
+  transition: color 0.3s;
+}
+
+.social-icons i {
+  font-size: 16px;
+}
+
+.social-icons a:hover {
+  color: #d97d32;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #7b5e3e;
+}

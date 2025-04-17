@@ -7,7 +7,7 @@ body {
   background-color: #e2b07e;
 }
 
-/*SECTION INTRODUÇÃO*/
+
 #inicio{
 height: 100vh;
 background-image: url(../images/BG.atividades.png);
@@ -38,7 +38,7 @@ text-align: justify;
 font-weight:500;
 }
 
-/*SECTION LINE*/
+
 .line {
 height: 80px;
 background-color:  #e2b07e;
@@ -48,7 +48,7 @@ background-color:  #e2b07e;
 color:transparent;
 }
 
-/*MAIN*/
+
 
 main {
 height: 100%;

@@ -15,12 +15,12 @@ body {
 }
 
 header {
-    /* background-color: #B8E0D2; */
+    
     padding: 15px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border-bottom: 1px solid #b3e5fc; */
+    
     margin-bottom: 30px;
     max-height: 20vh;
 }
@@ -36,7 +36,7 @@ header {
 }
 
 .navigation a {
-    /* pixel art font */
+    
     font-family: 'Press Start 2P', cursive;
     color: #006064;
     text-decoration: none;
@@ -112,7 +112,7 @@ header {
     height: auto;
     transform: scaleX(-1);
     position: relative;
-    margin-right: 30%; /* Pull image closer to text */
+    margin-right: 30%;
 }
 
 .know-more-btn {
@@ -266,7 +266,7 @@ header {
     font-style: italic;
 }
 
-/* Add pixel separators before and after Sobre section */
+
 .sobre-separator {
     display: flex;
     align-items: center;
@@ -355,7 +355,7 @@ footer .copyright {
     letter-spacing: 1px;
     padding: 0.8rem 1.5rem;
     
-    /* Pixelated rendering */
+    
     image-rendering: optimizeSpeed;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
@@ -365,7 +365,7 @@ footer .copyright {
     
     transition: none;
     
-    /* Create pixel border effect */
+    
     box-shadow: 
         inset -4px -4px 0px 0px rgba(0, 0, 0, 0.3),
         inset 4px 4px 0px 0px rgba(255, 255, 255, 0.3);

@@ -23,7 +23,7 @@ body::before {
     opacity: 0.5;
 }
 
-/* Screen curvature effect - more subtle */
+
 body::after {
     content: "";
     position: fixed;
