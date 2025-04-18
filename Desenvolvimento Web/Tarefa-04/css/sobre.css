@@ -5,6 +5,7 @@ body {
   background-color: #f7e4c3; 
   color: #5c3a1c; 
   line-height: 1.6; 
+ 
 }
 
 main {
@@ -17,13 +18,17 @@ main {
   background-color: #fff8f0; 
   margin-bottom: 40px; 
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-  border-radius: 8px; 
+  border-radius: 8px;
+  background-image: url(https://images.unsplash.com/photo-1507967669805-c23336beea5b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: cover;
 }
 
 .about-section .container {
   max-width: 900px; 
   margin: 0 auto; 
   padding: 20px;
+  background: #f7e4c3;
+  border-radius:16px;
 }
 
 .about-section h2 {
@@ -185,3 +190,4 @@ main {
     font-size: 1.6rem;
   }
 }
+
