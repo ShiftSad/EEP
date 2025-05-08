@@ -8,7 +8,7 @@ int main() {
     printf("Digite um número: ");
     scanf("%d", &num);
 
-    for (int i = 1; i <= sqrt(num); i++) {
+    for (int i = 1; i * i <= num; i++) {
         if (num % i == 0 && i != 1 && i != num) {
             isPrime = 1;
             break;
