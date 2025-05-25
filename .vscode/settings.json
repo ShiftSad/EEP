@@ -58,7 +58,9 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.default.compilerPath": "/usr/bin/gcc",
   "files.associations": {
+    "*.dbclient-js": "javascript",
     "*.tmpl": "html",
-    "math.h": "c"
+    "math.h": "c",
+    "stdio.h": "c"
   }
 }
