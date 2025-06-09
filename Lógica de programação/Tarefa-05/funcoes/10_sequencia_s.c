@@ -1,9 +1,11 @@
 #include <stdio.h>
 
-double calcular_sequencia_s(int n) {
+double calcular_valor_da_sequencia_s(int n_termos) {
     double s = 0.0;
-    for (int i = 1; i <= n; i++) {
-        s += 1.0 / i;
+    if (n_termos >= 1) {
+        for (int i = 1; i <= n_termos; i++) {
+            s += 1.0 / i;
+        }
     }
     return s;
 }
@@ -11,9 +13,6 @@ double calcular_sequencia_s(int n) {
 int main() {
     int n_val;
     scanf("%d", &n_val);
-    if (n_val >= 1) {
-        double resultado = calcular_sequencia_s(n_val);
-        printf("%.2f\n", resultado);
-    }
+    printf("%.2f\n", calcular_valor_da_sequencia_s(n_val));
     return 0;
 }
