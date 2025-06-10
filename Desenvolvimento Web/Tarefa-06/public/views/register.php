@@ -22,7 +22,7 @@
       <input class="password" name="password" type="password" class="form-control" placeholder="Senha" required>
     </div>
     <button type="submit" class="btn btn-secondary">Salvar</button>
-    <a href="login.php">Login</a>
+    <a href="login">Login</a>
   </form>
 
   <script>

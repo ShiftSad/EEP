@@ -1,6 +1,18 @@
 <?php
-require_once '../config/config.php';
-require_once '../src/router.php';
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-route($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+switch ($path) {
+  case '/':
+    require __DIR__ . '/views/home.php';
+    break;
+  case '/login':
+    require __DIR__ . '/views/login.php';
+    break;
+  case '/register':
+    require __DIR__ . '/views/register.php';
+    break;
+  default:
+    require __DIR__ . '/views/404.php';
+    break;
+}
 ?>

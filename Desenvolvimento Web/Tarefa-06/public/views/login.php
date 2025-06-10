@@ -21,7 +21,7 @@
       <input class="password" name="password" type="password" class="form-control" placeholder="Senha" required>
     </div>
     <button type="submit" class="btn btn-secondary">Salvar</button>
-    <a href="register.php">Register</a>
+    <a href="register">Register</a>
   </form>
 
   <script>
