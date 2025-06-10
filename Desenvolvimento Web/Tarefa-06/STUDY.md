@@ -62,6 +62,6 @@ list($a, $b, $c) = ['x', 'y', 'z']; // $a = 'x', $b = 'y', $c = 'z'
 * JSON Web Token (JWT) é uma forma compácta de transmitir informações seguras entre partes. Aqui eu uso como uma forma de autenticação independente de estado, ou seja, eu não preciso armazenar, consigo programáticamente descobrir se o token é válido ou não.
 
 * JWT é composto por três partes: Header, Payload e Signature. 
-    * O Header contem inforações necessárias para depois decodificar o token.
-    * O Payload contém as informações que eu quero transmitir, como o ID do usuário.
-    * A Signature é uma assinatura criptográfica que garante a integridade do token.
+  * O Header contem inforações necessárias para depois decodificar o token.
+  * O Payload contém as informações que eu quero transmitir, como o ID do usuário.
+  * A Signature é uma assinatura criptográfica que garante a integridade do token.

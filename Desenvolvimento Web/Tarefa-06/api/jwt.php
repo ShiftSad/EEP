@@ -1,12 +1,12 @@
 <?php
 function base64url_encode($data) {
-    return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+  return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
 function base64url_decode($data) {
   $remainder = strlen($data) % 4;
   if ($remainder) {
-    $data .= str_repeat('=', 4 - $remainder);
+  $data .= str_repeat('=', 4 - $remainder);
   }
   return base64_decode(strtr($data, '-_', '+/'));
 }
