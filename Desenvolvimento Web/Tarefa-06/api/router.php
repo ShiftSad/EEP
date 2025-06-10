@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/controller/user_controller.php'
+require_once __DIR__ . '/controller/user_controller.php';
 require_once __DIR__ . '/controller/auth_controller.php';
 
 function route($uri, $method) {
@@ -19,7 +19,6 @@ function route($uri, $method) {
   case 'users':
     handleUsers($method, $id);
     break;
-  }
   case 'login':
     handleLogin($method);
     break;
