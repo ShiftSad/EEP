@@ -2,39 +2,37 @@
 
 require_once __DIR__ . '/../jwt.php';
 
-function getAuthenticatedUser() {
+function getOptionalAuthenticatedUser() {
   global $jwt_secret;
 
   if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Authorization header not found']);
-    exit;
+    return null;
   }
 
-  $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
-  $parts = explode(' ', $authHeader);
-
+  $parts = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
   if (count($parts) !== 2 || $parts[0] !== 'Bearer') {
-    http_response_code(401);
-    echo json_encode(['error' => 'Invalid authorization header format']);
-    exit;
+    return null;
   }
 
   $token = $parts[1];
   $payload = validadeJWT($token, $jwt_secret);
 
-  if ($payload === false) {
+  return $payload ?: null;
+}
+
+function getAuthenticatedUser() {
+  $user = getOptionalAuthenticatedUser();
+  if (!$user) {
     http_response_code(401);
-    echo json_encode(['error' => 'Invalid or expired token']);
+    echo json_encode(['error' => 'Authentication required']);
     exit;
   }
-
-  return $payload;
+  return $user;
 }
 
 function handlePosts($method, $id) {
   global $connection;
-  $user = getAuthenticatedUser();
+  $user = getOptionalAuthenticatedUser();
   switch ($method) {
     case 'GET':
       if ($id) getPostById($connection, $id, $user);
@@ -68,29 +66,26 @@ function handlePosts($method, $id) {
 
 function listPosts($connection, $user) {
   $data = json_decode(file_get_contents('php://input'), true);
-
   $index = isset($data['index']) ? (int) $data['index'] : 0;
   $limit = isset($data['limit']) ? (int) $data['limit'] : 20;
-  $limit = min($limit, 100); // Hard cap limit to 100
-
+  $limit = min($limit, 100);
   $filter = $data['filter'] ?? null;
   $tags = $data['tags'] ?? [];
 
   $params = [];
   $param_types = '';
-
   $query = "SELECT DISTINCT p.id, p.user_id, p.title, p.content, p.image_url, p.visibility, p.created_at, u.name as author_name
             FROM posts p
             JOIN users u ON p.user_id = u.id";
-
   if (!empty($tags)) {
     $query .= " JOIN post_tags pt ON p.id = pt.post_id";
   }
 
   $whereClauses = [];
 
-  // Check de permissão: Admins veem tudo. Usuários veem posts públicos ou seus próprios posts privados.
-  if ($user['role'] !== 'admin') {
+  if (!$user) {
+    $whereClauses[] = "p.visibility = 'public'";
+  } else if ($user['role'] !== 'admin') {
     $whereClauses[] = "(p.visibility = 'public' OR p.user_id = ?)";
     $params[] = $user['id'];
     $param_types .= 'i';
@@ -102,7 +97,6 @@ function listPosts($connection, $user) {
     $params[] = "%$filter%";
     $param_types .= 'ss';
   }
-
   if (!empty($tags)) {
     $placeholders = implode(',', array_fill(0, count($tags), '?'));
     $whereClauses[] = "pt.tag IN ($placeholders)";
@@ -227,7 +221,11 @@ function updatePost($connection, $id, $user) {
     $params[] = $data['content'];
     $param_types .= 's';
   }
-  // ... add other fields as needed
+  if (isset($data['image_url'])) {
+    $fields[] = 'image_url = ?';
+    $params[] = $data['image_url'];
+    $param_types .= 's';
+  }
 
   if (empty($fields)) {
     http_response_code(400);

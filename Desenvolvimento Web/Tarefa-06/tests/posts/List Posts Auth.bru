@@ -1,0 +1,18 @@
+meta {
+  name: List Posts Auth
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/posts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "index": 0,
+    "limit": 30
+  }
+}

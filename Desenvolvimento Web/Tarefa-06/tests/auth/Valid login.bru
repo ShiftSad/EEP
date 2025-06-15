@@ -1,13 +1,13 @@
 meta {
-  name: Login with email
+  name: Valid login
   type: http
   seq: 2
 }
 
 post {
-  url: http://localhost:8080/api/api.php/login
+  url: {{host}}/login
   body: json
-  auth: inherit
+  auth: none
 }
 
 body:json {

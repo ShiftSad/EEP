@@ -100,7 +100,7 @@ function handleLogin($method) {
   $payload = [
     'iss' => 'main',
     'iat' => time(),
-    'exp' => time() + 3600,
+    'exp' => time() + 3600, // 1 hora
     'id' => $user['id'],
     'name' => $user['name'],
     'role' => $user['user_role'],
