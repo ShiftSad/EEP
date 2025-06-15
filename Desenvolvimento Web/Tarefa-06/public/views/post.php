@@ -7,16 +7,35 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-    #post-container { display: none; /* Escondido até tudo ser carregado */ }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      line-height: 1.6;
+      font-size: 1.25rem;
+      color: #333; 
+      max-width: 1100px; 
+      margin: 2rem auto; 
+      padding: 0 2rem; 
+      background:rgb(238, 227, 248);
+    }
+    #post-container { display: none; }
     #loading-state { text-align: center; color: #888; }
     #error-state { text-align: center; color: #d9534f; }
     h1 { color: #111; }
-    .meta { color: #666; font-size: 0.9em; border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+    .meta { color: #666; font-size: 0.9em; padding-bottom: 1rem; margin-bottom: 1rem; }
     .post-content img { max-width: 100%; height: auto; }
-    .post-content pre { background-color: #f4f4f4; padding: 1rem; border-radius: 5px; white-space: pre-wrap; }
-    .post-content code { font-family: "Courier New", Courier, monospace; }
+    .post-content code {
+      font-family: "Fira Mono", "Consolas", "Menlo", "Monaco", "Liberation Mono", "Courier New", monospace;
+    }
+    .post-content pre code {
+      border: 1px solid #b39ddb;
+      border-radius: 4px;
+      display: block;
+      padding: 1em;
+      background: #f8f6fc;
+    }
   </style>
 </head>
 <body data-post-id="<?php echo $post_id; ?>">
@@ -92,6 +111,11 @@
 
         const htmlContent = marked.parse(post.content);
         document.getElementById('post-content').innerHTML = htmlContent;
+
+        document.querySelectorAll('#post-content pre code').forEach((block) => {
+          const lang = block.className.replace('language-', '');
+          hljs.highlightElement(block);
+        });
 
         loadingState.style.display = 'none';
         postContainer.style.display = 'block';
