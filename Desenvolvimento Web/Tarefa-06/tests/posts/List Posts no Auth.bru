@@ -5,14 +5,19 @@ meta {
 }
 
 get {
-  url: {{host}}/posts
-  body: json
+  url: {{host}}/posts?index=0&limit=5
+  body: none
   auth: none
+}
+
+params:query {
+  index: 0
+  limit: 5
 }
 
 body:json {
   {
     "index": 0,
-    "limit": 30
+    "limit": 1
   }
 }
