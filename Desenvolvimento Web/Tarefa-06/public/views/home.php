@@ -35,7 +35,7 @@
       <input type="search" id="searchInput" class="form-control w-auto" placeholder="Procurar posts...">
 
       <select id="tagFilter" class="form-select w-auto">
-        <option value="">Todas as Tags</option>
+        <option value="">Todas Tags</option>
       </select>
 
       <button id="addPostBtn" class="btn btn-primary ms-auto">
@@ -45,53 +45,71 @@
   </nav>
   <div class="container py-4">
     <div id="blogList" class="row"></div>
+    <div id="loadMoreWrapper" class="text-center my-4">
+      <button id="loadMoreBtn" class="btn btn-secondary">
+        Carregar mais
+      </button>
+    </div>
   </div>
   <script>
-    const temp = [
-      {
-        title: "AAAAAAAAA",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: "https://picsum.photos/800/450?random=1",
-        url: "/posts/AAAAAAAAAA",
-        date: "2025-06-14",
-        readTime: "5",
-        tags: ['a', 'b', 'c']
-      },
-      {
-        title: "BBBBBBBBB",
-        content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: "https://picsum.photos/800/450?random=2",
-        url: "/posts/BBBBBBBBBB",
-        date: "2025-06-14",
-        readTime: "3",
-        tags: ['c', 'b', 'bb']
-      },
-      {
-        title: "CCCCCCCCC",
-        content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-        image: "https://picsum.photos/800/450?random=3",
-        url: "/posts/CCCCCCCCC",
-        date: "2025-06-14",
-        readTime: "4",
-        tags: ['123', 'asd', 'asdasd']
-      }
-    ];
-
+    const apiUrl = 'http://localhost:8080/api/v1/posts';
     const listEl = document.getElementById('blogList');
     const tagEl = document.getElementById('tagFilter');
+    const loadMoreBtn = document.getElementById('loadMoreBtn')
 
-    renderCards(temp);
-    buildTagOptions();
+    let currentIndex = 0
+    const limit = 20
+    fetchPosts(currentIndex, limit, false);
 
-    document
-        .getElementById('addPostBtn')
-        .addEventListener('click', addPost);
+    loadMoreBtn.addEventListener('click', () => {
+      fetchPosts(currentIndex, limit, true)
+    })
 
-    function renderCards(arr) {
-      listEl.innerHTML = arr.map(buildCard).join('');
+    function fetchPosts(index, limit, append = false) {
+      fetch(`${apiUrl}?index=${index}&limit=${limit}`)
+        .then((res) => {
+          if (!res.ok) throw new Error('Erro ao buscar posts')
+          return res.json()
+        })
+        .then((data) => {
+          const posts = data.map((item) => ({
+            id: item.id,
+            title: item.title,
+            content: item.content,
+            image: item.image_url,
+            url: `/posts/${item.id}`,
+            tags: [], // ajuste conforme necessário
+            date: item.created_at,
+            readTime: Math.max(
+              1,
+              Math.round((item.content.split(/\s+/).length || 0) / 200)
+            )
+          }))
+
+          // se não for append, limpa lista e reconstrói filtro de tags
+          if (!append) {
+            listEl.innerHTML = ''
+            buildTagOptions(posts)
+            currentIndex = 0
+          }
+
+          const html = posts.map(buildCard).join('')
+          if (append) listEl.insertAdjacentHTML('beforeend', html)
+          else listEl.innerHTML = html
+
+          currentIndex += posts.length
+          if (posts.length < limit) {
+            loadMoreBtn.style.display = 'none'
+          }
+        })
+        .catch((err) => {
+          listEl.innerHTML = `<div class="alert alert-danger">
+            ${err.message}
+          </div>`
+        })
     }
-    
-    function buildTagOptions() {
+
+    function buildTagOptions(posts) {
       const tags = new Set(posts.flatMap((p) => p.tags));
       tagEl.innerHTML =
         '<option value="">Todas Tags</option>' +

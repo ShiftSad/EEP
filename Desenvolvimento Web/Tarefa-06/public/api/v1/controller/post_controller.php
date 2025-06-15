@@ -65,12 +65,16 @@ function handlePosts($method, $id) {
 }
 
 function listPosts($connection, $user) {
-  $data = json_decode(file_get_contents('php://input'), true);
-  $index = isset($data['index']) ? (int) $data['index'] : 0;
-  $limit = isset($data['limit']) ? (int) $data['limit'] : 20;
+  $index = isset($_GET['index']) ? (int) $_GET['index'] : 0;
+  $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 20;
   $limit = min($limit, 100);
-  $filter = $data['filter'] ?? null;
-  $tags = $data['tags'] ?? [];
+  $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+  $tags = [];
+  if (isset($_GET['tags'])) {
+    $tags = array_filter(array_map('trim', explode(',', $_GET['tags'])));
+  }
+  if ($index < 0) $index = 0;
+  if ($limit < 1) $limit = 20;
 
   $params = [];
   $param_types = '';
