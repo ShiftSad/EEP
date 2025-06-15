@@ -1,4 +1,6 @@
 <?php
+$jwt_secret = 'banana';
+
 $username = 'root';
 $password = 'password';
 $host = 'mysql8';

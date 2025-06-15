@@ -21,8 +21,8 @@ function generateJWT($payload, $secret) {
   return implode('.', $segments);
 }
 
-function validadeJWT($jwt, $secret) {
-  $parts = explode('.', $jwt);
+function validadeJWT($token, $jwt_secret) {
+  $parts = explode('.', $token);
   if (count($parts) !== 3) return false;
 
   list($header_b64, $payload_b64, $signature_b64) = $parts;
@@ -32,8 +32,8 @@ function validadeJWT($jwt, $secret) {
   if (empty($header['alg']) || $header['alg'] !== 'HS256') return false; // Algoritmo inválido
 
   $signature_input = $header_b64 . '.' . $payload_b64;
-  $expected_signature = base64url_encode(hash_hmac('sha256', $signature_input, $secret, true));
-  if (!hash_equals($expected_sig, $signature_b64)) return false;
+  $expected_signature = base64url_encode(hash_hmac('sha256', $signature_input, $jwt_secret, true));
+  if (!hash_equals($expected_signature, $signature_b64)) return false;
 
   if (isset($payload['exp']) && time() > $payload['exp']) return false;
   return $payload;
