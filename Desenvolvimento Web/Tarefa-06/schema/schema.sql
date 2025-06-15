@@ -1,3 +1,4 @@
+-- Active: 1749507450799@@127.0.0.1@3306
 CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE TABLE IF NOT EXISTS public.users (
@@ -5,6 +6,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password_hash CHAR(60) NOT NULL,
+  user_role VARCHAR(20) CHECK (user_role IN ('admin', 'user')) DEFAULT 'user',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
