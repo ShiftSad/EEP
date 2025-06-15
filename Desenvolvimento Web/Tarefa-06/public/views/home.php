@@ -27,10 +27,14 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       filter: brightness(1.1);
     }
+
+    body {
+      background:rgb(238, 227, 248);
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar bg-body-tertiary sticky-top shadow-sm px-3">
+  <nav class="navbar sticky-top shadow-sm px-3" style="background-color:rgb(226, 200, 252);">
     <div class="container-fluid flex-wrap gap-2">
       <input type="search" id="searchInput" class="form-control w-auto" placeholder="Procurar posts...">
 
@@ -38,7 +42,7 @@
         <option value="">Todas Tags</option>
       </select>
 
-      <button id="addPostBtn" class="btn btn-primary ms-auto">
+      <button id="addPostBtn" class="btn btn-primary ms-auto" style="background-color: #5b2a91; border-color: #4b206e;">
         + Adicionar post
       </button>
     </div>
@@ -177,6 +181,7 @@
               <a
                 href="${p.url}"
                 class="btn btn-outline-primary"
+                style="border-color: #4b206e; color: #4b206e;"
               >
                 Continuar lendo
               </a>
