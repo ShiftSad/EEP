@@ -72,19 +72,26 @@
           return res.json()
         })
         .then((data) => {
-          const posts = data.map((item) => ({
-            id: item.id,
-            title: item.title,
-            content: item.content,
-            image: item.image_url,
-            url: `/posts/${item.id}`,
-            tags: [], // ajuste conforme necessário
-            date: item.created_at,
-            readTime: Math.max(
-              1,
-              Math.round((item.content.split(/\s+/).length || 0) / 200)
-            )
-          }))
+          const posts = data.map((item) => {
+            const content = item.content
+              .replace(/[^\p{L}\p{N}\s]/gu, '')
+              .split(/\s+/)
+              .slice(0, 20)
+              .join(' ');
+            return {
+              id: item.id,
+              title: item.title,
+              content: content,
+              image: item.image_url,
+              url: `/posts/${item.id}`,
+              tags: item.tags || [],
+              date: item.created_at,
+              readTime: Math.max(
+                1,
+                Math.round((item.content.split(/\s+/).length || 0) / 80)
+              )
+            };
+          });
 
           // se não for append, limpa lista e reconstrói filtro de tags
           if (!append) {
@@ -177,7 +184,7 @@
             <div
               class="card-footer bg-transparent border-0 small text-muted"
             >
-              Posted ${fmtDate(p.date)} · ${p.readTime} min
+              Postado ${fmtDate(p.date)} · ${p.readTime} min
             </div>
           </article>
         </div>`;
