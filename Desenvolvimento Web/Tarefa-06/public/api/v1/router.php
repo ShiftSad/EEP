@@ -26,6 +26,9 @@ function route($uri, $method) {
     // case 'users':
     //   handleUsers($method, $id);
     //   break;
+    case 'tags':
+      handleTags($method);
+      break;
     case 'posts':
       handlePosts($method, $id);
       break;

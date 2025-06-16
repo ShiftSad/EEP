@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../jwt.php';
 
 function getOptionalAuthenticatedUser() {
@@ -65,73 +64,99 @@ function handlePosts($method, $id) {
 }
 
 function listPosts($connection, $user) {
-  $index = isset($_GET['index']) ? (int) $_GET['index'] : 0;
-  $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 20;
-  $limit = min($limit, 100);
-  $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+  $index  = isset($_GET['index']) ? (int) $_GET['index'] : 0;
+  $limit  = isset($_GET['limit']) ? (int) $_GET['limit'] : 20;
+  $limit  = min($limit, 100);
+  $filter = $_GET['filter'] ?? null;
+
   $tags = [];
   if (isset($_GET['tags'])) {
     $tags = array_filter(array_map('trim', explode(',', $_GET['tags'])));
   }
+
   if ($index < 0) $index = 0;
   if ($limit < 1) $limit = 20;
 
-  $params = [];
-  $param_types = '';
-  $query = "SELECT DISTINCT p.id, p.user_id, p.title, p.content, p.image_url, p.visibility, p.created_at, u.name as author_name
-            FROM posts p
-            JOIN users u ON p.user_id = u.id";
-  if (!empty($tags)) {
-    $query .= " JOIN post_tags pt ON p.id = pt.post_id";
-  }
+  $query = "SELECT p.id,
+                   p.user_id,
+                   p.title,
+                   p.content,
+                   p.image_url,
+                   p.visibility,
+                   p.created_at,
+                   u.name                        AS author_name,
+                   GROUP_CONCAT(DISTINCT pt.tag) AS tags
+            FROM   posts          p
+            JOIN   users          u  ON p.user_id = u.id
+            LEFT  JOIN post_tags  pt ON p.id      = pt.post_id";
 
   $whereClauses = [];
+  $params       = [];
+  $paramTypes   = '';
 
   if (!$user) {
     $whereClauses[] = "p.visibility = 'public'";
-  } else if ($user['role'] !== 'admin') {
+  } elseif ($user['role'] !== 'admin') {
     $whereClauses[] = "(p.visibility = 'public' OR p.user_id = ?)";
-    $params[] = $user['id'];
-    $param_types .= 'i';
+    $params[]       = $user['id'];
+    $paramTypes    .= 'i';
   }
 
   if ($filter) {
     $whereClauses[] = "(p.title LIKE ? OR p.content LIKE ?)";
-    $params[] = "%$filter%";
-    $params[] = "%$filter%";
-    $param_types .= 'ss';
+    $params[]       = "%$filter%";
+    $params[]       = "%$filter%";
+    $paramTypes    .= 'ss';
   }
-  if (!empty($tags)) {
-    $placeholders = implode(',', array_fill(0, count($tags), '?'));
+
+  if ($tags) {
+    $placeholders   = implode(',', array_fill(0, count($tags), '?'));
     $whereClauses[] = "pt.tag IN ($placeholders)";
-    foreach ($tags as $tag) {
-      $params[] = $tag;
-      $param_types .= 's';
+    foreach ($tags as $t) {
+      $params[]    = $t;
+      $paramTypes .= 's';
     }
   }
 
-  if (!empty($whereClauses)) {
-    $query .= " WHERE " . implode(' AND ', $whereClauses);
+  if ($whereClauses) {
+    $query .= ' WHERE ' . implode(' AND ', $whereClauses);
   }
 
-  $query .= " ORDER BY p.created_at DESC LIMIT ? OFFSET ?";
-  $params[] = $limit;
-  $params[] = $index;
-  $param_types .= 'ii';
+  $query .= ' GROUP BY p.id ORDER BY p.created_at DESC LIMIT ? OFFSET ?';
+
+  $params[]     = $limit;
+  $params[]     = $index;
+  $paramTypes  .= 'ii';
 
   $stmt = $connection->prepare($query);
-  if ($param_types) {
-    $stmt->bind_param($param_types, ...$params);
+  if ($paramTypes) {
+    $stmt->bind_param($paramTypes, ...$params);
   }
   $stmt->execute();
   $result = $stmt->get_result();
-  $posts = $result->fetch_all(MYSQLI_ASSOC);
+  $posts  = $result->fetch_all(MYSQLI_ASSOC);
+
+  foreach ($posts as &$post) {
+    $post['tags'] = $post['tags']
+      ? array_filter(array_map('trim', explode(',', $post['tags'])))
+      : [];
+  }
 
   echo json_encode($posts);
 }
 
 function getPostById($connection, $id, $user) {
-  $stmt = $connection->prepare("SELECT p.*, u.name as author_name FROM posts p JOIN users u ON p.user_id = u.id WHERE p.id = ?");
+  $stmt = $connection->prepare(
+    "SELECT p.*,
+            u.name                              AS author_name,
+            GROUP_CONCAT(DISTINCT pt.tag)       AS tags
+     FROM   posts          p
+     JOIN   users          u  ON p.user_id = u.id
+     LEFT JOIN post_tags   pt ON p.id      = pt.post_id
+     WHERE  p.id = ?
+     GROUP  BY p.id"
+  );
+  
   $stmt->bind_param('i', $id);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -149,6 +174,10 @@ function getPostById($connection, $id, $user) {
     echo json_encode(['error' => 'You do not have permission to view this post']);
     return;
   }
+
+  $post['tags'] = $post['tags']
+    ? array_filter(array_map('trim', explode(',', $post['tags'])))
+    : [];
 
   echo json_encode($post);
 }
