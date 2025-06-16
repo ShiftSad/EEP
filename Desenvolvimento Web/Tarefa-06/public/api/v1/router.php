@@ -4,6 +4,7 @@ require_once __DIR__ . '/controller/post_controller.php';
 require_once __DIR__ . '/controller/auth_controller.php';
 require_once __DIR__ . '/controller/tag_controller.php';
 require_once __DIR__ . '/controller/image_controller.php';
+require_once __DIR__ . '/controller/comment_controller.php';
 
 function route($uri, $method) {
   $path = parse_url($uri, PHP_URL_PATH);
@@ -42,6 +43,9 @@ function route($uri, $method) {
       break;
     case 'images':
       handleImages($method, $id);
+      break;
+    case 'comments':
+      handleComments($method, $id);
       break;
     default:
       http_response_code(404);

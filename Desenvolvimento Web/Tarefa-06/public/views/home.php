@@ -124,8 +124,8 @@
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
       </button>
-      <a id="addPostBtn" class="btn btn-primary ms-auto" style="background-color: #5b2a91; border-color: #4b206e;" href="/dashboard">
-        + Adicionar post
+      <a id="addPostBtn" class="ms-auto nav-link" href="/dashboard">
+        Dashboard
       </a>
       <div class="d-flex align-items-center me-3">
         <span id="profileName" class="fw-medium pe-2">Visitante</span>
