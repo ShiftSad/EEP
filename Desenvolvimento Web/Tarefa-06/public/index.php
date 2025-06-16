@@ -13,6 +13,9 @@ elseif ($path === '/register') {
 elseif ($path === '/dashboard') {
   require __DIR__ . '/views/dashboard.php';
 }
+else if ($path === '/profile') {
+  require __DIR__ . '/views/profile.php';
+}
 elseif (preg_match('/^\/posts\/(\d+)$/', $path, $matches)) {
   $post_id = (int) $matches[1];
   require __DIR__ . '/views/post.php';

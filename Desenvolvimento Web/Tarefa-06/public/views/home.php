@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/theme.css" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/navbar.js"></script>
   <style>
     .tag-badge {
       background: linear-gradient(135deg, var(--tag-color), var(--tag-color-dark));
@@ -44,9 +46,6 @@
       background: #5b2a91;
       color: white;
       border-color: #4b206e;
-    }
-    body {
-      background:rgb(238, 227, 248);
     }
     .sidebar {
       position: fixed;
@@ -98,6 +97,7 @@
   </style>
 </head>
 <body>
+  <div data-navbar-type="home"></div>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="sidebar" id="tagSidebar">
     <div class="sidebar-header">
@@ -111,30 +111,6 @@
       </button>
     </div>
   </div>
-  <nav class="navbar sticky-top shadow-sm px-3" style="background-color:rgb(226, 200, 252);">
-    <div class="container-fluid flex-wrap gap-2">
-      <input type="search" id="searchInput" class="form-control w-auto" placeholder="Procurar posts...">
-      <button id="toggleSidebar" class="btn btn-secondary me-2" style="background-color: #5b2a91; border-color: #4b206e; color: white;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
-          <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
-        </svg>
-      </button>
-      <button id="searchBtn" class="btn btn-secondary" style="background-color: #5b2a91; border-color: #4b206e;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-      </button>
-      <a id="addPostBtn" class="ms-auto nav-link" href="/dashboard">
-        Dashboard
-      </a>
-      <div class="d-flex align-items-center me-3">
-        <span id="profileName" class="fw-medium pe-2">Visitante</span>
-        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 8 8" width="16" class="me-2">
-          <path d="m4 0c-1.1 0-2 1.12-2 2.5s.9 2.5 2 2.5 2-1.12 2-2.5-.9-2.5-2-2.5zm-2.09 5c-1.06.05-1.91.92-1.91 2v1h8v-1c0-1.08-.84-1.95-1.91-2-.54.61-1.28 1-2.09 1s-1.55-.39-2.09-1z"/>
-        </svg>
-      </div>
-    </div>
-  </nav>
   <div class="container py-4">
     <div id="blogList" class="row"></div>
     <div id="loadMoreWrapper" class="text-center my-4">
@@ -143,8 +119,7 @@
       </button>
     </div>
   </div>
-  <script>
-    const apiUrl = 'http://localhost:8080/api/v1/posts';
+  <script>    const apiUrl = 'http://localhost:8080/api/v1/posts';
     const tagsUrl = 'http://localhost:8080/api/v1/tags';
     const listEl = document.getElementById('blogList');
     const tagEl = document.getElementById('tagFilter');

@@ -1,0 +1,41 @@
+body {
+  background: rgb(238, 227, 248);
+}
+
+.navbar {
+  background-color: rgb(226, 200, 252) !important;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #5b2a91 !important;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #5b2a91;
+  border-color: #4b206e;
+}
+
+.btn-primary:hover {
+  background-color: #4b206e;
+  border-color: #3a1855;
+}
+
+.btn-outline-primary {
+  color: #5b2a91;
+  border-color: #5b2a91;
+}
+
+.btn-outline-primary:hover {
+  background-color: #5b2a91;
+  border-color: #5b2a91;
+}
+
+.text-primary {
+  color: #5b2a91 !important;
+}
+
+.card {
+  box-shadow: 0 2px 10px rgba(91, 42, 145, 0.1);
+}

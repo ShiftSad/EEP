@@ -5,6 +5,7 @@ require_once __DIR__ . '/controller/auth_controller.php';
 require_once __DIR__ . '/controller/tag_controller.php';
 require_once __DIR__ . '/controller/image_controller.php';
 require_once __DIR__ . '/controller/comment_controller.php';
+require_once __DIR__ . '/controller/user_controller.php';
 
 function route($uri, $method) {
   $path = parse_url($uri, PHP_URL_PATH);
@@ -26,9 +27,9 @@ function route($uri, $method) {
   header("Content-Type: application/json");
 
   switch ($resource) {
-    // case 'users':
-    //   handleUsers($method, $id);
-    //   break;
+    case 'users':
+      handleUsers($method, $id);
+      break;
     case 'tags':
       handleTags($method);
       break;

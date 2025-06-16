@@ -9,17 +9,13 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/assets/css/theme.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
+    <script defer src="/assets/js/navbar.js"></script>
     <style>
-      body {
-        background: rgb(238, 227, 248);
-      }
-      .navbar {
-        background-color: rgb(226, 200, 252) !important;
-      }
       .table-hover tbody tr:hover {
         background-color: #e9ecef;
         cursor: pointer;
@@ -30,62 +26,10 @@
       .loading-spinner {
         display: none;
       }
-      .btn-primary {
-        background-color: #5b2a91;
-        border-color: #4b206e;
-      }
-      .btn-primary:hover {
-        background-color: #4b206e;
-        border-color: #3a1855;
-      }
-      .btn-outline-primary {
-        color: #5b2a91;
-        border-color: #5b2a91;
-      }
-      .btn-outline-primary:hover {
-        background-color: #5b2a91;
-        border-color: #5b2a91;
-      }
-      .text-primary {
-        color: #5b2a91 !important;
-      }
-      .navbar-brand {
-        color: #5b2a91 !important;
-        font-weight: 600;
-      }
-      .nav-link {
-        color: #5b2a91 !important;
-      }
-      .card {
-        box-shadow: 0 2px 10px rgba(91, 42, 145, 0.1);
-      }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg shadow-sm">
-      <div class="container">
-        <a class="navbar-brand" href="/">Meu Blog</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <span class="nav-link" id="profileName"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+    <div data-navbar-type="default" data-link-label="Home" data-link-href="/"></div>
     <div class="container py-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2" style="color: #5b2a91">Dashboard de Postagens</h1>
@@ -248,8 +192,6 @@
       const savePostBtn = document.getElementById('savePostBtn');
       const postModal = new bootstrap.Modal(document.getElementById('postModal'));
       const postForm = document.getElementById('postForm');
-      const profileNameEl = document.getElementById('profileName');
-      const postImageFile = document.getElementById('postImageFile');
 
       let currentUser = null;
 
@@ -262,7 +204,6 @@
 
         try {
           currentUser = parseJwt(token);
-          profileNameEl.textContent = `Olá, ${currentUser.name}`;
           fetchPosts();
         } catch (error) {
           localStorage.removeItem('token');
