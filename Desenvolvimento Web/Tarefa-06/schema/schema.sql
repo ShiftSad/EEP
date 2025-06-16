@@ -1,4 +1,3 @@
--- Active: 1749507450799@@127.0.0.1@3306
 CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE TABLE IF NOT EXISTS public.users (
@@ -14,7 +13,10 @@ CREATE TABLE IF NOT EXISTS public.posts (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT UNSIGNED NOT NULL,
   title VARCHAR(255) NOT NULL,
+  description TEXT NULL,
   content TEXT NOT NULL,
+  location VARCHAR(255) NULL,
+  event_datetime DATETIME NULL,
   image_url VARCHAR(255),
   visibility VARCHAR(20) CHECK (visibility IN ('public', 'private')) DEFAULT 'public',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

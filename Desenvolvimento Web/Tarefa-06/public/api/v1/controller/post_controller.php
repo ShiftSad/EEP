@@ -80,7 +80,10 @@ function listPosts($connection, $user) {
   $query = "SELECT p.id,
                    p.user_id,
                    p.title,
+                   p.description,
                    p.content,
+                   p.location,
+                   p.event_datetime,
                    p.image_url,
                    p.visibility,
                    p.created_at,
@@ -103,15 +106,17 @@ function listPosts($connection, $user) {
   }
 
   if ($filter) {
-    $whereClauses[] = "(p.title LIKE ? OR p.content LIKE ?)";
+    $whereClauses[] = "(p.title LIKE ? OR p.content LIKE ? OR p.description LIKE ? OR p.location LIKE ?)";
     $params[]       = "%$filter%";
     $params[]       = "%$filter%";
-    $paramTypes    .= 'ss';
+    $params[]       = "%$filter%";
+    $params[]       = "%$filter%";
+    $paramTypes    .= 'ssss';
   }
 
   if ($tags) {
     $placeholders   = implode(',', array_fill(0, count($tags), '?'));
-    $whereClauses[] = "pt.tag IN ($placeholders)";
+    $whereClauses[] = "p.id IN (SELECT post_id FROM post_tags WHERE tag IN ($placeholders))";
     foreach ($tags as $t) {
       $params[]    = $t;
       $paramTypes .= 's';
@@ -168,8 +173,7 @@ function getPostById($connection, $id, $user) {
     return;
   }
 
-  // Check de permissão
-  if ($post['visibility'] === 'private' && $user['role'] !== 'admin' && $post['user_id'] != $user['id']) {
+  if ($post['visibility'] === 'private' && (!$user || ($user['role'] !== 'admin' && $post['user_id'] != $user['id']))) {
     http_response_code(403);
     echo json_encode(['error' => 'You do not have permission to view this post']);
     return;
@@ -194,9 +198,13 @@ function createPost($connection, $user) {
   $connection->begin_transaction();
 
   try {
-    $stmt = $connection->prepare("INSERT INTO posts (user_id, title, content, image_url, visibility) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $connection->prepare("INSERT INTO posts (user_id, title, description, content, location, event_datetime, image_url, visibility) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $description = $data['description'] ?? null;
+    $location = $data['location'] ?? null;
+    $event_datetime = $data['event_datetime'] ?? null;
     $visibility = $data['visibility'] ?? 'public';
-    $stmt->bind_param('issss', $user['id'], $data['title'], $data['content'], $data['image_url'], $visibility);
+    $image_url = $data['image_url'] ?? null;
+    $stmt->bind_param('isssssss', $user['id'], $data['title'], $description, $data['content'], $location, $event_datetime, $image_url, $visibility);
     $stmt->execute();
     $postId = $connection->insert_id;
 
@@ -219,7 +227,6 @@ function createPost($connection, $user) {
 }
 
 function updatePost($connection, $id, $user) {
-  // First, get the post to check for ownership
   $stmt = $connection->prepare("SELECT user_id FROM posts WHERE id = ?");
   $stmt->bind_param('i', $id);
   $stmt->execute();
@@ -232,7 +239,6 @@ function updatePost($connection, $id, $user) {
     return;
   }
 
-  // Permission Check
   if ($user['role'] !== 'admin' && $post['user_id'] != $user['id']) {
     http_response_code(403);
     echo json_encode(['error' => 'You do not have permission to edit this post']);
@@ -249,9 +255,24 @@ function updatePost($connection, $id, $user) {
     $params[] = $data['title'];
     $param_types .= 's';
   }
+  if (isset($data['description'])) {
+    $fields[] = 'description = ?';
+    $params[] = $data['description'];
+    $param_types .= 's';
+  }
   if (isset($data['content'])) {
     $fields[] = 'content = ?';
     $params[] = $data['content'];
+    $param_types .= 's';
+  }
+  if (isset($data['location'])) {
+    $fields[] = 'location = ?';
+    $params[] = $data['location'];
+    $param_types .= 's';
+  }
+  if (isset($data['event_datetime'])) {
+    $fields[] = 'event_datetime = ?';
+    $params[] = $data['event_datetime'];
     $param_types .= 's';
   }
   if (isset($data['image_url'])) {
@@ -298,7 +319,6 @@ function updatePost($connection, $id, $user) {
 }
 
 function deletePost($connection, $id, $user) {
-  // Procurar o post, assim podemos ver se o usuário tem permissão para deletar
   $stmt = $connection->prepare("SELECT user_id FROM posts WHERE id = ?");
   $stmt->bind_param('i', $id);
   $stmt->execute();
@@ -311,14 +331,12 @@ function deletePost($connection, $id, $user) {
     return;
   }
 
-  // Permission Check
   if ($user['role'] !== 'admin' && $post['user_id'] != $user['id']) {
     http_response_code(403);
     echo json_encode(['error' => 'You do not have permission to delete this post']);
     return;
   }
 
-  // MYSQL vai deletar automaticamente os comentários e tags associados
   $deleteStmt = $connection->prepare("DELETE FROM posts WHERE id = ?");
   $deleteStmt->bind_param('i', $id);
   if ($deleteStmt->execute()) http_response_code(204);
