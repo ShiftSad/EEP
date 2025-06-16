@@ -5,14 +5,15 @@ meta {
 }
 
 get {
-  url: {{host}}/posts?index=0&limit=5
+  url: {{host}}/posts?index=0&limit=20&filter=Machine Learning
   body: none
   auth: none
 }
 
 params:query {
   index: 0
-  limit: 5
+  limit: 20
+  filter: Machine Learning
 }
 
 body:json {

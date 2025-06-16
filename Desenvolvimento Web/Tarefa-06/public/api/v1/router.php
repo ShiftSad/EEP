@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/controller/post_controller.php';
 require_once __DIR__ . '/controller/auth_controller.php';
 require_once __DIR__ . '/controller/tag_controller.php';
+require_once __DIR__ . '/controller/image_controller.php';
 
 function route($uri, $method) {
   $path = parse_url($uri, PHP_URL_PATH);
@@ -38,6 +39,9 @@ function route($uri, $method) {
       break;
     case 'register':
       handleRegister($method);
+      break;
+    case 'images':
+      handleImages($method, $id);
       break;
     default:
       http_response_code(404);
