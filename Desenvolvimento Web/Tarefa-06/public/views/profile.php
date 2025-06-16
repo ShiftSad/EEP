@@ -28,7 +28,11 @@
     </style>
   </head>
   <body>
-    <div data-navbar-type="default" data-link-label="Dashboard" data-link-href="/dashboard"></div>
+    <div
+      data-navbar-type="default"
+      data-link-label="Dashboard"
+      data-link-href="/dashboard"
+    ></div>
     <div class="container py-5">
       <h1 class="h2 mb-4" style="color: #5b2a91">Editar Perfil</h1>
       <div class="card shadow-sm">
@@ -47,11 +51,21 @@
               <div class="col-md-8">
                 <div class="mb-3">
                   <label for="userName" class="form-label">Nome</label>
-                  <input type="text" class="form-control" id="userName" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
                   <label for="userEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="userEmail" disabled />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="userEmail"
+                    disabled
+                  />
                 </div>
               </div>
             </div>
@@ -74,7 +88,9 @@
               </div>
               <hr />
               <div class="mb-1">
-                <label for="profileImageUrl" class="form-label small">Ou usar URL existente:</label>
+                <label for="profileImageUrl" class="form-label small"
+                  >Ou usar URL existente:</label
+                >
                 <input
                   type="text"
                   class="form-control form-control-sm"
@@ -98,12 +114,20 @@
                 />
               </div>
               <div class="col-md-6 mb-3">
-                <label for="confirmPassword" class="form-label">Confirmar Nova Senha</label>
-                <input type="password" class="form-control" id="confirmPassword" />
+                <label for="confirmPassword" class="form-label"
+                  >Confirmar Nova Senha</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                />
               </div>
             </div>
             <div class="text-end mt-4">
-              <button type="submit" class="btn btn-primary px-4">Salvar Alterações</button>
+              <button type="submit" class="btn btn-primary px-4">
+                Salvar Alterações
+              </button>
             </div>
           </form>
         </div>
@@ -131,97 +155,110 @@
           if (!response.ok) throw new Error('Falha ao carregar perfil.');
 
           const user = await response.json();
-          document.getElementById('profileName').textContent = `Olá, ${user.name}`;
           document.getElementById('userName').value = user.name;
           document.getElementById('userEmail').value = user.email;
           if (user.profile_image_url) {
-            document.getElementById('profileImagePreview').src = user.profile_image_url;
-            document.getElementById('profileImageUrl').value = user.profile_image_url;
+            document.getElementById('profileImagePreview').src =
+              user.profile_image_url;
+            document.getElementById('profileImageUrl').value =
+              user.profile_image_url;
           }
         } catch (error) {
           showAlert(error.message, 'danger');
         }
       }
 
-      document.getElementById('profileImageFile').addEventListener('change', async (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
+      document
+        .getElementById('profileImageFile')
+        .addEventListener('change', async (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
 
-        const uploadStatus = document.getElementById('uploadStatus');
-        uploadStatus.textContent = 'Enviando...';
-        uploadStatus.className = 'form-text text-primary';
+          const uploadStatus = document.getElementById('uploadStatus');
+          uploadStatus.textContent = 'Enviando...';
+          uploadStatus.className = 'form-text text-primary';
 
-        const formData = new FormData();
-        formData.append('image', file);
+          const formData = new FormData();
+          formData.append('image', file);
 
-        try {
-          const response = await fetch(imageApiUrl, {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${token}` },
-            body: formData,
-          });
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.error || 'Falha no upload.');
+          try {
+            const response = await fetch(imageApiUrl, {
+              method: 'POST',
+              headers: { Authorization: `Bearer ${token}` },
+              body: formData,
+            });
+            const result = await response.json();
+            if (!response.ok)
+              throw new Error(result.error || 'Falha no upload.');
 
-          document.getElementById('profileImageUrl').value = result.url;
-          document.getElementById('profileImagePreview').src = result.url;
-          uploadStatus.textContent = 'Upload concluído!';
-          uploadStatus.className = 'form-text text-success';
-        } catch (error) {
-          uploadStatus.textContent = `Erro: ${error.message}`;
-          uploadStatus.className = 'form-text text-danger';
-        }
-      });
+            document.getElementById('profileImageUrl').value = result.url;
+            document.getElementById('profileImagePreview').src = result.url;
+            uploadStatus.textContent = 'Upload concluído!';
+            uploadStatus.className = 'form-text text-success';
+          } catch (error) {
+            uploadStatus.textContent = `Erro: ${error.message}`;
+            uploadStatus.className = 'form-text text-danger';
+          }
+        });
 
-      document.getElementById('profileImageUrl').addEventListener('input', (e) => {
-        const url = e.target.value;
-        const preview = document.getElementById('profileImagePreview');
-        if (url) {
-          preview.src = url;
-        }
-      });
+      document
+        .getElementById('profileImageUrl')
+        .addEventListener('input', (e) => {
+          const url = e.target.value;
+          const preview = document.getElementById('profileImagePreview');
+          if (url) {
+            preview.src = url;
+          }
+        });
 
-      document.getElementById('profileForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
+      document
+        .getElementById('profileForm')
+        .addEventListener('submit', async (event) => {
+          event.preventDefault();
 
-        const newPassword = document.getElementById('newPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
+          const newPassword = document.getElementById('newPassword').value;
+          const confirmPassword =
+            document.getElementById('confirmPassword').value;
 
-        if (newPassword !== confirmPassword) {
-          showAlert('As senhas não coincidem.', 'danger');
-          return;
-        }
+          if (newPassword !== confirmPassword) {
+            showAlert('As senhas não coincidem.', 'danger');
+            return;
+          }
 
-        const updateData = {
-          name: document.getElementById('userName').value,
-          profile_image_url: document.getElementById('profileImageUrl').value || null,
-        };
+          const updateData = {
+            name: document.getElementById('userName').value,
+            profile_image_url:
+              document.getElementById('profileImageUrl').value || null,
+          };
 
-        if (newPassword) {
-          updateData.password = newPassword;
-        }
+          if (newPassword) {
+            updateData.password = newPassword;
+          }
 
-        try {
-          const response = await fetch(userApiUrl, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(updateData),
-          });
+          try {
+            const response = await fetch(userApiUrl, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(updateData),
+            });
 
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.error || 'Falha ao atualizar o perfil.');
+            const result = await response.json();
+            if (!response.ok)
+              throw new Error(result.error || 'Falha ao atualizar o perfil.');
 
-          document.getElementById('profileName').textContent = `Olá, ${result.name}`;
-          document.getElementById('newPassword').value = '';
-          document.getElementById('confirmPassword').value = '';
-          showAlert('Perfil atualizado com sucesso!', 'success');
-        } catch (error) {
-          showAlert(error.message, 'danger');
-        }
-      });
+            document.getElementById(
+              'profileName'
+            ).textContent = `Olá, ${result.name}`;
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            showAlert('Perfil atualizado com sucesso!', 'success');
+          } catch (error) {
+            showAlert(error.message, 'danger');
+          }
+        });
 
       function showAlert(message, type) {
         const alertContainer = document.getElementById('alert-container');

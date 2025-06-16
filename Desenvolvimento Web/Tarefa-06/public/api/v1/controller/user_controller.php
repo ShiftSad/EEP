@@ -1,7 +1,4 @@
 <?php
-require_once __DIR__ . '/../jwt.php';
-require_once __DIR__ . '/post_controller.php'; // Para getAuthenticatedUser()
-
 function handleUsers($method) {
   global $connection;
 

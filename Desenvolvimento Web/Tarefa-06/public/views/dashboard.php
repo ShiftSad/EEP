@@ -29,7 +29,12 @@
     </style>
   </head>
   <body>
-    <div data-navbar-type="default" data-link-label="Home" data-link-href="/"></div>
+    <div
+      data-navbar-type="default"
+      data-link-label="Home"
+      data-link-href="/"
+    ></div>
+
     <div class="container py-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2" style="color: #5b2a91">Dashboard de Postagens</h1>
@@ -87,15 +92,33 @@
               <input type="hidden" id="postId" />
               <div class="mb-3">
                 <label for="postTitle" class="form-label">Título</label>
-                <input type="text" class="form-control" id="postTitle" required />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="postTitle"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <label for="postDescription" class="form-label">Descrição (curta)</label>
-                <textarea class="form-control" id="postDescription" rows="2"></textarea>
+                <label for="postDescription" class="form-label"
+                  >Descrição (curta)</label
+                >
+                <textarea
+                  class="form-control"
+                  id="postDescription"
+                  rows="2"
+                ></textarea>
               </div>
               <div class="mb-3">
-                <label for="postContent" class="form-label">Conteúdo Completo</label>
-                <textarea class="form-control" id="postContent" rows="8" required></textarea>
+                <label for="postContent" class="form-label"
+                  >Conteúdo Completo</label
+                >
+                <textarea
+                  class="form-control"
+                  id="postContent"
+                  rows="8"
+                  required
+                ></textarea>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
@@ -108,7 +131,11 @@
                   <label for="postEventDateTime" class="form-label"
                     >Data e Hora do Evento (opcional)</label
                   >
-                  <input type="datetime-local" class="form-control" id="postEventDateTime" />
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="postEventDateTime"
+                  />
                 </div>
               </div>
               <div class="mb-3">
@@ -121,7 +148,11 @@
                         src=""
                         class="img-fluid rounded"
                         alt="Pré-visualização da imagem"
-                        style="display: none; max-height: 150px; object-fit: cover"
+                        style="
+                          display: none;
+                          max-height: 150px;
+                          object-fit: cover;
+                        "
                       />
                     </div>
                     <div class="col-md-8">
@@ -154,7 +185,9 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="postTags" class="form-label">Tags (separadas por vírgula)</label>
+                <label for="postTags" class="form-label"
+                  >Tags (separadas por vírgula)</label
+                >
                 <input
                   type="text"
                   class="form-control"
@@ -163,7 +196,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="postVisibility" class="form-label">Visibilidade</label>
+                <label for="postVisibility" class="form-label"
+                  >Visibilidade</label
+                >
                 <select class="form-select" id="postVisibility">
                   <option value="public">Público</option>
                   <option value="private">Privado</option>
@@ -172,10 +207,16 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
               Cancelar
             </button>
-            <button type="button" id="savePostBtn" class="btn btn-primary">Salvar</button>
+            <button type="button" id="savePostBtn" class="btn btn-primary">
+              Salvar
+            </button>
           </div>
         </div>
       </div>
@@ -192,8 +233,7 @@
       const savePostBtn = document.getElementById('savePostBtn');
       const postModal = new bootstrap.Modal(document.getElementById('postModal'));
       const postForm = document.getElementById('postForm');
-
-      let currentUser = null;
+      const postImageFile = document.getElementById('postImageFile');
 
       document.addEventListener('DOMContentLoaded', () => {
         if (!token) {
@@ -201,15 +241,7 @@
           window.location.href = '/login';
           return;
         }
-
-        try {
-          currentUser = parseJwt(token);
-          fetchPosts();
-        } catch (error) {
-          localStorage.removeItem('token');
-          alert('Sua sessão expirou. Por favor, faça o login novamente.');
-          window.location.href = '/login';
-        }
+        fetchPosts();
       });
 
       postImageFile.addEventListener('change', handleImageUpload);
@@ -320,7 +352,11 @@
       }
 
       async function deletePost(postId) {
-        if (!confirm('Tem certeza que deseja excluir esta postagem? Esta ação não pode ser desfeita.')) {
+        if (
+          !confirm(
+            'Tem certeza que deseja excluir esta postagem? Esta ação não pode ser desfeita.'
+          )
+        ) {
           return;
         }
 
@@ -354,7 +390,9 @@
 <td>${escapeHtml(post.title)}</td>
 <td>${fmtDate(post.created_at)}</td>
 <td>
-<span class="badge ${post.visibility === 'public' ? 'bg-success' : 'bg-secondary'}">
+<span class="badge ${
+              post.visibility === 'public' ? 'bg-success' : 'bg-secondary'
+            }">
 ${post.visibility}
 </span>
 </td>
@@ -394,19 +432,22 @@ ${post.visibility}
             const response = await fetch(`${apiUrl}/${postId}`, {
               headers: { Authorization: `Bearer ${token}` },
             });
-            if (!response.ok) throw new Error('Não foi possível carregar os dados da postagem.');
+            if (!response.ok)
+              throw new Error('Não foi possível carregar os dados da postagem.');
             const post = await response.json();
 
             document.getElementById('postId').value = post.id;
             document.getElementById('postTitle').value = post.title;
-            document.getElementById('postDescription').value = post.description || '';
+            document.getElementById('postDescription').value =
+              post.description || '';
             document.getElementById('postContent').value = post.content;
             document.getElementById('postLocation').value = post.location || '';
-            document.getElementById('postEventDateTime').value = post.event_datetime
-              ? post.event_datetime.slice(0, 16)
-              : '';
+            document.getElementById('postEventDateTime').value =
+              post.event_datetime ? post.event_datetime.slice(0, 16) : '';
             document.getElementById('postImageUrl').value = post.image_url || '';
-            document.getElementById('postTags').value = (post.tags || []).join(', ');
+            document.getElementById('postTags').value = (
+              post.tags || []
+            ).join(', ');
             document.getElementById('postVisibility').value = post.visibility;
 
             const imagePreview = document.getElementById('imagePreview');
@@ -420,7 +461,8 @@ ${post.visibility}
             document.getElementById('uploadStatus').textContent = '';
             document.getElementById('postImageFile').value = '';
 
-            document.getElementById('postModalLabel').textContent = 'Editar Postagem';
+            document.getElementById('postModalLabel').textContent =
+              'Editar Postagem';
             postModal.show();
           } catch (error) {
             alert(error.message);
@@ -437,18 +479,6 @@ ${post.visibility}
         if (isLoading) {
           postsTableBody.innerHTML = '';
         }
-      }
-
-      function parseJwt(token) {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
-        );
-        return JSON.parse(jsonPayload);
       }
 
       function fmtDate(iso) {
