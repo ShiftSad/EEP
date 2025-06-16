@@ -256,7 +256,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         if (!token) {
           alert('Acesso negado. Por favor, faça o login.');
-          window.location.href = '/login.html';
+          window.location.href = '/login';
           return;
         }
 
@@ -267,7 +267,7 @@
         } catch (error) {
           localStorage.removeItem('token');
           alert('Sua sessão expirou. Por favor, faça o login novamente.');
-          window.location.href = '/login.html';
+          window.location.href = '/login';
         }
       });
 
