@@ -14,7 +14,7 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
-    <script defer src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/navbar.js"></script>
     <style>
       .tag-badge {
         background: linear-gradient(
@@ -130,16 +130,14 @@
         </button>
       </div>
     </div>
-    <script>
+    <script defer>
       const apiUrl = 'http://localhost:8080/api/v1/posts';
       const tagsUrl = 'http://localhost:8080/api/v1/tags';
       const listEl = document.getElementById('blogList');
       const tagEl = document.getElementById('tagFilter');
       const loadMoreBtn = document.getElementById('loadMoreBtn');
-      const searchButton = document.getElementById('searchBtn');
       const searchInput = document.getElementById('searchInput');
       const clearTagsBtn = document.getElementById('clearTags');
-      const toggleSidebarBtn = document.getElementById('toggleSidebar');
       const closeSidebarBtn = document.getElementById('closeSidebar');
       const sidebarEl = document.getElementById('tagSidebar');
       const overlayEl = document.getElementById('sidebarOverlay');
@@ -152,25 +150,28 @@
       let searchedTerm = '';
       let allTags = [];
 
-      document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('load', () => {
         fetchTags();
         fetchPosts(currentIndex, limit, false, searchedTerm, []);
+
+        const toggleSidebarBtn = document.getElementById('toggleSidebar');
+        const searchButton = document.getElementById('searchBtn');
+
+        searchButton.addEventListener('click', () => {
+          searchedTerm = searchInput.value.trim();
+          listEl.innerHTML = '';
+          fetchPosts(0, limit, false, searchedTerm, selectedTags);
+          currentIndex = 0;
+        });
+
+        toggleSidebarBtn.addEventListener('click', () => {
+          sidebarEl.classList.add('show');
+          overlayEl.classList.add('show');
+        });
       });
 
       loadMoreBtn.addEventListener('click', () => {
         fetchPosts(currentIndex, limit, true, searchedTerm, selectedTags);
-      });
-
-      searchButton.addEventListener('click', () => {
-        searchedTerm = searchInput.value.trim();
-        listEl.innerHTML = '';
-        fetchPosts(0, limit, false, searchedTerm, selectedTags);
-        currentIndex = 0;
-      });
-
-      toggleSidebarBtn.addEventListener('click', () => {
-        sidebarEl.classList.add('show');
-        overlayEl.classList.add('show');
       });
 
       closeSidebarBtn.addEventListener('click', closeSidebar);
