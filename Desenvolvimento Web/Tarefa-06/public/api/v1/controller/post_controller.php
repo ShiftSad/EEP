@@ -280,6 +280,11 @@ function updatePost($connection, $id, $user) {
     $params[] = $data['image_url'];
     $param_types .= 's';
   }
+  if (isset($data['visibility'])) {
+    $fields[]      = 'visibility = ?';
+    $params[]      = $data['visibility'];
+    $param_types  .= 's';
+  }
 
   if (empty($fields)) {
     http_response_code(400);
