@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <style>
     .tag-badge {
       background: linear-gradient(135deg, var(--tag-color), var(--tag-color-dark));
@@ -21,13 +21,11 @@
       transition: all 0.2s ease;
       cursor: pointer;
     }
-    
     .tag-badge:hover {
       transform: translateY(-1px);
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       filter: brightness(1.1);
     }
-
     .filter-tag {
       background: #f8f9fa;
       color: #495057;
@@ -39,77 +37,127 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
     .filter-tag:hover {
       background: #e9ecef;
     }
-
     .filter-tag.active {
       background: #5b2a91;
       color: white;
       border-color: #4b206e;
     }
-
     body {
       background:rgb(238, 227, 248);
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 300px;
+      height: 100vh;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      transition: left 0.3s ease;
+      z-index: 1050;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .sidebar.show {
+      left: 0;
+    }
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      z-index: 1040;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #6c757d;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="tagSidebar">
+    <div class="sidebar-header">
+      <h6 class="mb-0" style="color: #5b2a91;">Filtrar por Tags</h6>
+      <button class="sidebar-close" id="closeSidebar">&times;</button>
+    </div>
+    <div id="tagFilter" class="d-flex flex-wrap"></div>
+    <div class="mt-3">
+      <button id="clearTags" class="btn btn-sm btn-outline-secondary w-100">
+        Limpar filtros
+      </button>
+    </div>
+  </div>
   <nav class="navbar sticky-top shadow-sm px-3" style="background-color:rgb(226, 200, 252);">
     <div class="container-fluid flex-wrap gap-2">
       <input type="search" id="searchInput" class="form-control w-auto" placeholder="Procurar posts...">
+      <button id="toggleSidebar" class="btn btn-secondary me-2" style="background-color: #5b2a91; border-color: #4b206e; color: white;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+          <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+        </svg>
+      </button>
       <button id="searchBtn" class="btn btn-secondary" style="background-color: #5b2a91; border-color: #4b206e;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397l3.85 3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>
       </button>
-
       <button id="addPostBtn" class="btn btn-primary ms-auto" style="background-color: #5b2a91; border-color: #4b206e;">
         + Adicionar post
       </button>
     </div>
   </nav>
   <div class="container py-4">
-    <div class="row">
-      <div class="col-lg-3 col-md-4 mb-4">
-        <div class="card shadow-sm">
-          <div class="card-header" style="background-color: #5b2a91; color: white;">
-            <h6 class="mb-0">Filtrar por Tags</h6>
-          </div>
-          <div class="card-body">
-            <div id="tagFilter" class="d-flex flex-wrap"></div>
-            <div class="mt-3">
-              <button id="clearTags" class="btn btn-sm btn-outline-secondary w-100">
-                Limpar filtros
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-9 col-md-8">
-        <div id="blogList" class="row"></div>
-        <div id="loadMoreWrapper" class="text-center my-4">
-          <button id="loadMoreBtn" class="btn btn-secondary">
-            Carregar mais
-          </button>
-        </div>
-      </div>
+    <div id="blogList" class="row"></div>
+    <div id="loadMoreWrapper" class="text-center my-4">
+      <button id="loadMoreBtn" class="btn btn-secondary">
+        Carregar mais
+      </button>
     </div>
   </div>
   <script>
     const apiUrl = 'http://localhost:8080/api/v1/posts';
+    const tagsUrl = 'http://localhost:8080/api/v1/tags';
     const listEl = document.getElementById('blogList');
     const tagEl = document.getElementById('tagFilter');
-    const loadMoreBtn = document.getElementById('loadMoreBtn')
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
     const searchButton = document.getElementById('searchBtn');
     const searchInput = document.getElementById('searchInput');
     const clearTagsBtn = document.getElementById('clearTags');
+    const toggleSidebarBtn = document.getElementById('toggleSidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+    const sidebarEl = document.getElementById('tagSidebar');
+    const overlayEl = document.getElementById('sidebarOverlay');
 
-    let currentIndex = 0
-    const limit = 20
+    let currentIndex = 0;
+    const limit = 20;
     let selectedTags = [];
     let searchedTerm = '';
+    let allTags = [];
+
+    fetchTags();
 
     fetchPosts(currentIndex, limit, false, searchedTerm, []);
 
@@ -118,11 +166,52 @@
     });
 
     searchButton.addEventListener('click', () => {
-      const searchTerm = searchInput.value.trim();
+      searchedTerm = searchInput.value.trim();
       listEl.innerHTML = '';
-      fetchPosts(0, limit, false, searchTerm, selectedTags);
+      fetchPosts(0, limit, false, searchedTerm, selectedTags);
       currentIndex = 0;
     });
+
+    toggleSidebarBtn.addEventListener('click', () => {
+      sidebarEl.classList.add('show');
+      overlayEl.classList.add('show');
+    });
+
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    overlayEl.addEventListener('click', closeSidebar);
+
+    clearTagsBtn.addEventListener('click', () => {
+      selectedTags = [];
+      updateTagFilters();
+      fetchPosts(0, limit, false, searchedTerm, selectedTags);
+      currentIndex = 0;
+      closeSidebar();
+    });
+
+    function closeSidebar() {
+      sidebarEl.classList.remove('show');
+      overlayEl.classList.remove('show');
+    }
+
+    function fetchTags() {
+      fetch(tagsUrl)
+        .then(res => {
+          if (!res.ok) throw new Error('Erro ao buscar tags');
+          return res.json();
+        })
+        .then(data => {
+          allTags = data
+            .map(t => ({
+              tag: t.tag,
+              usage_count: parseInt(t.usage_count, 10)
+            }))
+            .sort((a, b) => b.usage_count - a.usage_count);
+          buildTagOptions();
+        })
+        .catch(() => {
+          tagEl.innerHTML = '<div class="text-danger">Erro ao carregar tags</div>';
+        });
+    }
 
     function fetchPosts(index, limit, append = false, filter = '', tags = []) {
       let url = `${apiUrl}?index=${index}&limit=${limit}`;
@@ -131,8 +220,8 @@
       
       fetch(url)
         .then((res) => {
-          if (!res.ok) throw new Error('Erro ao buscar posts')
-          return res.json()
+          if (!res.ok) throw new Error('Erro ao buscar posts');
+          return res.json();
         })
         .then((data) => {
           const posts = data.map((item) => {
@@ -156,49 +245,50 @@
             };
           });
 
-          // se não for append, limpa lista e reconstrói filtro de tags
           if (!append) {
-            listEl.innerHTML = ''
-            buildTagOptions(posts)
-            currentIndex = 0
+            listEl.innerHTML = '';
+            currentIndex = 0;
           }
 
-          const html = posts.map(buildCard).join('')
-          if (append) listEl.insertAdjacentHTML('beforeend', html)
-          else listEl.innerHTML = html
+          const html = posts.map(buildCard).join('');
+          if (append) listEl.insertAdjacentHTML('beforeend', html);
+          else listEl.innerHTML = html;
 
-          currentIndex += posts.length
-          if (posts.length < limit) {
-            loadMoreBtn.style.display = 'none'
-          }
+          currentIndex += posts.length;
+          if (posts.length < limit) loadMoreBtn.style.display = 'none';
+          else loadMoreBtn.style.display = '';
         })
         .catch((err) => {
           listEl.innerHTML = `<div class="alert alert-danger">
             ${err.message}
-          </div>`
-        })
+          </div>`;
+        });
     }
 
-    function buildTagOptions(posts) {
-      const tags = new Set(posts.flatMap((p) => p.tags));
-      const tagButtons = [...tags]
-        .sort()
-        .map((tag) => {
+    function buildTagOptions() {
+      const tagButtons = allTags
+        .map(({ tag }) => {
           const isActive = selectedTags.includes(tag);
           return `<span class="filter-tag ${isActive ? 'active' : ''}" data-tag="${tag}">${tag}</span>`;
         })
         .join('');
-      
       tagEl.innerHTML = tagButtons;
-      
-      tagEl.addEventListener('click', (e) => {
+
+      tagEl.onclick = null;
+      tagEl.onclick = (e) => {
         if (e.target.classList.contains('filter-tag')) {
           const tag = e.target.dataset.tag;
-          if (selectedTags.includes(tag)) selectedTags = selectedTags.filter(t => t !== tag);
-          else selectedTags.push(tag);
+          if (selectedTags.includes(tag)) {
+            selectedTags = selectedTags.filter(t => t !== tag);
+          } else {
+            selectedTags.push(tag);
+          }
           updateTagFilters();
+          fetchPosts(0, limit, false, searchedTerm, selectedTags);
+          currentIndex = 0;
         }
-      });
+      };
+      updateTagFilters();
     }
 
     function updateTagFilters() {
@@ -219,15 +309,12 @@
         '#f59e0b', '#10b981', '#06b6d4', '#84cc16',
         '#f97316', '#8b5cf6', '#6366f1', '#ec4899'
       ];
-      
       let hash = 0;
       for (let i = 0; i < tag.length; i++) {
         hash = tag.charCodeAt(i) + ((hash << 5) - hash);
       }
-      
       const colorIndex = Math.abs(hash) % colors.length;
       const baseColor = colors[colorIndex];
-      
       const darkColor = baseColor + '88';
       return { base: baseColor, dark: darkColor };
     }
@@ -243,14 +330,12 @@
               />
             </div>`
         : '';
-
       const tagBadges = p.tags
         .map((t) => {
           const colors = getTagColor(t);
           return `<span class="tag-badge" style="--tag-color: ${colors.base}; --tag-color-dark: ${colors.dark}">${t}</span>`;
         })
         .join('');
-
       return `
         <div class="col-md-6 col-lg-4 mb-4">
           <article class="card h-100 shadow-sm">
