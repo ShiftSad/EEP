@@ -94,6 +94,12 @@
       font-weight: 600;
       margin-bottom: 1rem;
     }
+  .comment-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
   </style>
 </head>
 <body data-post-id="<?php echo htmlspecialchars($post_id ?? '', ENT_QUOTES, 'UTF-8'); ?>">
@@ -246,27 +252,30 @@
       function createCommentElement(comment) {
         const div = document.createElement('div');
         div.className = 'comment';
-
+      
         const formattedDate = new Date(comment.created_at).toLocaleString('en-US', {
           dateStyle: 'medium',
           timeStyle: 'short',
         });
-
+      
+        // Se o comentário trouxer profile_image_url, monta o <img>, senão usa o SVG
+        const avatarHtml = comment.author_profile_image_url
+          ? `<img src="${comment.author_profile_image_url}" alt="Avatar">`
+          : userIconSvg;
+      
         div.innerHTML = `
-              <div class="comment-avatar">${userIconSvg}</div>
-              <div class="comment-body">
-                <div class="comment-header">
-                  <span class="comment-author">${comment.author_name}</span>
-                  <span class="comment-date">${formattedDate}</span>
-                </div>
-                <p class="comment-text">${
-                  document.createTextNode(comment.content).textContent
-                }</p>
-              </div>
-            `;
+          <div class="comment-avatar">${avatarHtml}</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">${comment.author_name}</span>
+              <span class="comment-date">${formattedDate}</span>
+            </div>
+            <p class="comment-text">${document.createTextNode(comment.content).textContent}</p>
+          </div>
+        `;
         return div;
       }
-
+      
       function setupCommentForm() {
         const commentForm = document.getElementById('comment-form');
         const loginPrompt = document.getElementById('login-prompt');

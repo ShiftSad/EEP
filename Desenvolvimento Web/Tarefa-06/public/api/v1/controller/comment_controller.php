@@ -35,7 +35,7 @@ function listCommentsForPost($connection) {
   checkPostExistsAndIsViewable($connection, $post_id, $user);
 
   $stmt = $connection->prepare(
-    "SELECT c.id, c.post_id, c.user_id, c.content, c.created_at, u.name AS author_name
+    "SELECT c.id, c.post_id, c.user_id, c.content, c.created_at, u.name AS author_name, u.profile_image_url AS author_profile_image_url
      FROM comments c
      JOIN users u ON c.user_id = u.id
      WHERE c.post_id = ?
@@ -87,7 +87,7 @@ function createComment($connection, $user) {
 
 function getCommentById($connection, $id) {
     $stmt = $connection->prepare(
-      "SELECT c.id, c.post_id, c.user_id, c.content, c.created_at, u.name AS author_name, p.visibility as post_visibility, p.user_id as post_author_id
+      "SELECT c.id, c.post_id, c.user_id, c.content, c.created_at, u.name AS author_name, u.profile_image_url AS author_profile_image_url, p.visibility as post_visibility, p.user_id as post_author_id
        FROM comments c
        JOIN users u ON c.user_id = u.id
        JOIN posts p ON c.post_id = p.id
