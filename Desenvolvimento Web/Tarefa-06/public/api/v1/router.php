@@ -15,17 +15,6 @@ function route($uri, $method) {
   $resource = $parts[2] ?? null;
   $id = $parts[3] ?? null;
 
-  if ($method === 'OPTIONS') {
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    http_response_code(204);
-    exit;
-  }
-  
-  header("Access-Control-Allow-Origin: *");
-  header("Content-Type: application/json");
-
   switch ($resource) {
     case 'users':
       handleUsers($method, $id);
