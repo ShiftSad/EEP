@@ -40,25 +40,26 @@ void enqueue(Queue *queue, int x) {
 }
 
 int size(Queue *queue) {
-    return queue->rear + 1;
+    return queue->rear - queue->front;
 }
 
 int front(Queue *queue) {
-    return queue->front;
+    if (empty(queue)) {
+        printf("A fila está vazia");
+        exit(1);
+    }
+    
+    return queue->itens[queue->front];
 }
 
 int dequeue(Queue *queue) {
-    if (empty(queue)) {
+    if ((queue->rear + 1) % MAX == queue->front) {
         printf("Fila vazia");
         exit(1);
     }
 
-    int x;
-    x = queue->itens[0];
-    for (int i = 0; queue->rear; i++) {
-        queue->itens[i] = queue->itens[i + 1];
-    }
+    int x = queue->itens[queue->front];
+    queue->front = (queue->front + 1) % MAX;
     
-    queue->rear--;
     return x;
 }

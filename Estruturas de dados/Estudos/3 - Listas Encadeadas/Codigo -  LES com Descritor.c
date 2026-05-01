@@ -70,16 +70,17 @@ int main(void)
 		printf("6 -> Sair \n:");
 		scanf("%d", &q);     /* Ler a opcao do usuario */
 		switch(q) {
-			case 1: printf("Dado para insercao na lista: ");
-                    scanf("%d",&info);
-                    erro=Inserir_inicio_LS (&desc, info);
-                    if (erro == 0) printf("Insercao realizada com sucesso\n");
-                    system("pause");
-					break;
-			case 2: printf("Dado para insercao na lista: ");
-                    scanf("%d",&info);
-                    //Inserir_fim_LS (&ini, info);
-			        break;
+			case 1: 
+			    printf("Dado para insercao na lista: ");
+                scanf("%d",&info);
+                erro=Inserir_inicio_LS (&desc, info);
+                if (erro == 0) printf("Insercao realizada com sucesso\n");
+                system("pause");
+			case 2: 
+			    printf("Dado para insercao na lista: ");
+                scanf("%d",&info);
+                //Inserir_fim_LS (&ini, info);
+			    break;
             case 3: //erro = Remover_inicio_LS (&ini);
                     if (erro==1)
                     {
@@ -99,11 +100,10 @@ int main(void)
                     printf("\nLISTA VAZIA !\n");
                     system("pause");
 					break;
-			case 6: break;
+			case 6: return 1;
 			default: printf("\n\n Opcao nao valida");
 		}
 		getchar();    /* Limpa o buffer de entrada */
-	} while ((q != 6) );
 
 }
 
